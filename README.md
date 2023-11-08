@@ -43,10 +43,10 @@ Mengimplementasikan aplikasi [Yu-Gi-Oh! Card Collection Project](https://github.
     - [X] "Kamu telah menekan tombol Lihat Item" ketika tombol `Lihat Item` ditekan.
     - [X] "Kamu telah menekan tombol Tambah Item" ketika tombol `Tambah Item` ditekan.
     - [X] "Kamu telah menekan tombol Logout" ketika tombol `Logout` ditekan.
-- [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder*.
-    - [ ] Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
-    - [ ] Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
-    - [ ] Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+- [X] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder*.
+    - [X] Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
+    - [X] Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
+    - [X] Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 - [ ] Melakukan `add`-`commit`-`push` ke GitHub.
 - [X] *BONUS*: Mengimplementasikan warna-warna yang berbeda untuk setiap tombol.
 
@@ -360,3 +360,38 @@ Kode program di atas akan menghasilkan tampilan sebagai berikut:
 
 ### Menjawab pertanyaan-pertanyaan tugas 7
 #### Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
+Dalam pengembangan aplikasi dengan Flutter, *widget* merupakan elemen dasar untuk membangun antarmuka pengguna dan mereka dibedakan menjadi dua jenis utama yaitu *Stateless* dan *Stateful*.
+
+1. *Stateless Widget*: Komponen ini digunakan ketika bagian dari aplikasi dapat disajikan/ditampilkan tanpa mengetahui informasi tambahan atau tanpa mengubah konfigurasi selama *runtime*. Dalam kata lain, *widget* tidak pernah berubah atau tidak memiliki status yang dapat berubah. Sebagai contoh, ikon, judul adalah *stateless widget*.
+
+2. *Stateful Widget*: Berbeda dengan *Stateless*, *Stateful Widget* digunakan ketika Anda membutuhkan *widget* yang dapat berubah seiring waktu, seperti pengguna melakukan interaksi atau fungsi yang dapat mengubah tampilan aplikasi yang sedang berjalan, seperti *Checkbox*, *Radio Button*, *Slider*, *InkWell*, *Form*, dan *DateTimePicker* adalah beberapa contoh dari *Stateful Widgets*.
+
+Jadi perbedaan utamanya adalah bahwa *Stateless widget* tidak memerlukan perubahan status selama *runtime* sedangkan *Stateful widget* memungkinkan perubahan status selama *runtime*, seperti interaksi pengguna atau data yang berubah seiring waktu.
+
+#### Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
+
+1. `Scaffold`: *Widget* ini digunakan untuk membuat tata letak dasar aplikasi. *Widget* ini menyediakan fungsi seperti *app bar*, *body*, *drawer*, dan lain-lain. *Widget* ini juga menyediakan fungsi untuk menampilkan *snackbar* dan *bottom sheet*.
+
+2. `AppBar`: *Widget* ini digunakan untuk membuat *app bar* yang berisi judul dan tombol kiri dan kanan. *Widget* ini juga menyediakan fungsi untuk menampilkan *menu*.
+
+3. `Text`: *Widget* ini digunakan untuk membuat teks.
+
+4. `Icon`: *Widget* ini digunakan untuk membuat ikon.
+
+5. `Padding`: *Widget* ini digunakan untuk membuat jarak antar *widget*.
+
+6. `Column`: *Widget* ini digunakan untuk membuat kolom.
+
+7. `GridView`: *Widget* ini digunakan untuk membuat *grid*.
+
+8. `Material`: *Widget* ini digunakan untuk membuat *widget* yang mengikuti desain material.
+
+9. `InkWell`: *Widget* ini digunakan untuk membuat *widget* yang dapat diubah warnanya ketika ditekan.
+
+10. `Center`: *Widget* ini digunakan untuk membuat *widget* yang berada di tengah.
+
+11. `Container`: *Widget* ini digunakan untuk membuat *widget* yang dapat diubah warnanya.
+
+12. `SnackBar`: *Widget* ini digunakan untuk membuat *snackbar*.
+
+13. `ScaffoldMessenger`: *Widget* ini digunakan untuk membuat *snackbar*. *Widget* ini juga menyediakan fungsi untuk menampilkan *snackbar*.
