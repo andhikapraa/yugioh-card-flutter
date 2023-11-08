@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class MenuItem {
     final String title;
     final IconData icon;
+    final Color color;
     final Function onTap;
     
     MenuItem({
         required this.title,
         required this.icon,
+        required this.color,
         required this.onTap,
     });
 }
@@ -19,16 +21,19 @@ class Menu extends StatelessWidget {
         MenuItem(
             title: 'Lihat Item',
             icon: Icons.list,
+            color: const Color(0xFF0D6EFD),
             onTap: () {},
         ),
         MenuItem(
             title: 'Tambah Item',
             icon: Icons.add,
+            color: const Color(0xFF198754),
             onTap: () {},
         ),
         MenuItem(
             title: 'Logout',
             icon: Icons.logout,
+            color: const Color(0xFFDC3545),
             onTap: () {},
         ),
     ];
@@ -84,7 +89,7 @@ class MenuCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color(0xFF0D6EFD),
+      color: item.color,
       child: InkWell(
         onTap: () {
           ScaffoldMessenger.of(context)

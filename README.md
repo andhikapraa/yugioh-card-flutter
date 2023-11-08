@@ -48,7 +48,7 @@ Mengimplementasikan aplikasi [Yu-Gi-Oh! Card Collection Project](https://github.
     - [ ] Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
     - [ ] Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
 - [ ] Melakukan `add`-`commit`-`push` ke GitHub.
-- [ ] *BONUS*: Mengimplementasikan warna-warna yang berbeda untuk setiap tombol.
+- [X] *BONUS*: Mengimplementasikan warna-warna yang berbeda untuk setiap tombol.
 
 ### Membuat program Flutter baru
 Membuat program Flutter baru dengan nama `yugioh_card` dengan perintah `flutter create yugioh_card` pada terminal. Program ini akan dibuat pada direktori `yugioh_card`.
@@ -223,3 +223,140 @@ class MyApp extends StatelessWidget {
 Kode program di atas akan menghasilkan tampilan sebagai berikut:
 ![Menu](https://user-images.githubusercontent.com/55692621/137630421-5b8b5b0a-0b0a-4b0a-8b0a-9b0b0b0b0b0b.png)
 
+### Mengimplementasikan warna-warna yang berbeda untuk setiap tombol
+Untuk mengimplementasikan warna-warna yang berbeda untuk setiap tombol, kita perlu mengubah kode program `menu.dart` menjadi seperti berikut:
+```dart
+import 'package:flutter/material.dart';
+
+class MenuItem {
+    final String title;
+    final IconData icon;
+    final Color color;
+    final Function onTap;
+    
+    MenuItem({
+        required this.title,
+        required this.icon,
+        required this.color,
+        required this.onTap,
+    });
+}
+
+class Menu extends StatelessWidget {
+    Menu({Key? key}) : super(key: key);
+
+    final List<MenuItem> menuItems = [
+        MenuItem(
+            title: 'Lihat Item',
+            icon: Icons.list,
+            color: const Color(0xFF0D6EFD),
+            onTap: () {},
+        ),
+        MenuItem(
+            title: 'Tambah Item',
+            icon: Icons.add,
+            color: const Color(0xFF198754),
+            onTap: () {},
+        ),
+        MenuItem(
+            title: 'Logout',
+            icon: Icons.logout,
+            color: const Color(0xFFDC3545),
+            onTap: () {},
+        ),
+    ];
+
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(
+                title: const Text(
+                  'Yu-Gi-Oh! Card Collection',
+                  ),
+            ),
+            body: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                        children: <Widget>[
+                            const Padding(
+                                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                                child: Text(
+                                    'Menu',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 30.0,
+                                        fontWeight: FontWeight.bold,
+                                    ),
+                                ),
+                            ),
+                            GridView.count(
+                                primary: true,
+                                padding: const EdgeInsets.all(20.0),
+                                crossAxisSpacing: 10.0,
+                                mainAxisSpacing: 10.0,
+                                crossAxisCount: 3,
+                                shrinkWrap: true,
+                                children: menuItems.map((item) {
+                                    return MenuCard(item);
+                                }).toList(),
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+class MenuCard extends StatelessWidget {
+  final MenuItem item;
+
+  const MenuCard(this.item, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      child: InkWell(
+        onTap: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+              content: Text("Kamu telah menekan tombol ${item.title}!"),
+              duration: const Duration(seconds: 1),
+            ));
+          item.onTap();
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+Kode program di atas akan menghasilkan tampilan sebagai berikut:
+![Menu](https://user-images.githubusercontent.com/55692621/137630421-5b8b5b0a-0b0a-4b0a-8b0a-9b0b0b0b0b0b.png)
+
+### Menjawab pertanyaan-pertanyaan tugas 7
+#### Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
