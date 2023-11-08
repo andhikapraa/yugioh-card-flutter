@@ -20,13 +20,21 @@ Kelas  : PBP C
 ```
 
 ## Task Checklist
-- [ ] [Tugas 7: Elemen Dasar Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-7)
+- [X] [Tugas 7: Elemen Dasar Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-7)
 
 # Table of Contents
 
 [**Yu-Gi-Oh! Card Collection Project**](<#Yu-Gi-Oh-Card-Collection-Flutter-Project>)<br />
 &emsp;[**Task Checklist**](<#Task-Checklist>)<br />
 [**Table of contents**](<#Table-of-contents>)<br />
+[**Tugas 7: Elemen Dasar Flutter**](<#Tugas-7-Elemen-Dasar-Flutter>)<br />
+&emsp;[**Tugas 7 Checklist**](<#Tugas-7-Checklist>)<br />
+&emsp;&emsp;[**Membuat program Flutter baru**](<#Membuat-program-Flutter-baru>)<br />
+&emsp;&emsp;[**Membuat tiga tombol sederhana dengan `Snackbar`**](<#Membuat-tiga-tombol-sederhana-dengan-Snackbar>)<br />
+&emsp;&emsp;[**Mengimplementasikan warna-warna yang berbeda untuk setiap tombol**](<#Mengimplementasikan-warna-warna-yang-berbeda-untuk-setiap-tombol>)<br />
+&emsp;&emsp;[**Menjawab pertanyaan-pertanyaan tugas 7**](<#Menjawab-pertanyaan-pertanyaan-tugas-7>)<br />
+&emsp;&emsp;&emsp;[**Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?**](<#Apa-perbedaan-utama-antara-stateless-dan-stateful-widget-dalam-konteks-pengembangan-aplikasi-Flutter>)<br />
+&emsp;&emsp;&emsp;[**Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.**](<#Sebutkan-seluruh-widget-yang-kamu-gunakan-untuk-menyelesaikan-tugas-ini-dan-jelaskan-fungsinya-masing-masing>)<br />
 
 
 # Tugas 7: Elemen Dasar Flutter
@@ -47,7 +55,7 @@ Mengimplementasikan aplikasi [Yu-Gi-Oh! Card Collection Project](https://github.
     - [X] Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
     - [X] Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.
     - [X] Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
-- [ ] Melakukan `add`-`commit`-`push` ke GitHub.
+- [X] Melakukan `add`-`commit`-`push` ke GitHub.
 - [X] *BONUS*: Mengimplementasikan warna-warna yang berbeda untuk setiap tombol.
 
 ### Membuat program Flutter baru
@@ -221,7 +229,7 @@ class MyApp extends StatelessWidget {
 ```
 
 Kode program di atas akan menghasilkan tampilan sebagai berikut:
-![Menu](https://user-images.githubusercontent.com/55692621/137630421-5b8b5b0a-0b0a-4b0a-8b0a-9b0b0b0b0b0b.png)
+![Menu](https://raw.githubusercontent.com/andhikapraa/yugioh-card-flutter/main/screenshot/ygocc-menu-1.png)
 
 ### Mengimplementasikan warna-warna yang berbeda untuk setiap tombol
 Untuk mengimplementasikan warna-warna yang berbeda untuk setiap tombol, kita perlu mengubah kode program `menu.dart` menjadi seperti berikut:
@@ -356,7 +364,7 @@ class MenuCard extends StatelessWidget {
 ```
 
 Kode program di atas akan menghasilkan tampilan sebagai berikut:
-![Menu](https://user-images.githubusercontent.com/55692621/137630421-5b8b5b0a-0b0a-4b0a-8b0a-9b0b0b0b0b0b.png)
+![Menu](https://raw.githubusercontent.com/andhikapraa/yugioh-card-flutter/main/screenshot/ygocc-menu-1.png)
 
 ### Menjawab pertanyaan-pertanyaan tugas 7
 #### Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?
