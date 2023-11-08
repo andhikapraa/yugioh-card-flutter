@@ -21,6 +21,7 @@ Kelas  : PBP C
 
 ## Task Checklist
 - [X] [Tugas 7: Elemen Dasar Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-7)
+- [ ] [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
 
 # Table of Contents
 
@@ -35,6 +36,8 @@ Kelas  : PBP C
 &emsp;&emsp;[**Menjawab pertanyaan-pertanyaan tugas 7**](<#Menjawab-pertanyaan-pertanyaan-tugas-7>)<br />
 &emsp;&emsp;&emsp;[**Apa perbedaan utama antara _stateless_ dan _stateful widget_ dalam konteks pengembangan aplikasi Flutter?**](<#Apa-perbedaan-utama-antara-stateless-dan-stateful-widget-dalam-konteks-pengembangan-aplikasi-Flutter>)<br />
 &emsp;&emsp;&emsp;[**Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.**](<#Sebutkan-seluruh-widget-yang-kamu-gunakan-untuk-menyelesaikan-tugas-ini-dan-jelaskan-fungsinya-masing-masing>)<br />
+[**Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements**](<#Tugas-8-Flutter-Navigation-Layouts-Forms-and-Input-Elements>)<br />
+&emsp;[**Tugas 8 Checklist**](<#Tugas-8-Checklist>)<br />
 
 
 # Tugas 7: Elemen Dasar Flutter
@@ -403,3 +406,36 @@ Jadi perbedaan utamanya adalah bahwa *Stateless widget* tidak memerlukan perubah
 12. `SnackBar`: *Widget* ini digunakan untuk membuat *snackbar*.
 
 13. `ScaffoldMessenger`: *Widget* ini digunakan untuk membuat *snackbar*. *Widget* ini juga menyediakan fungsi untuk menampilkan *snackbar*.
+
+
+# Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements
+Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada aplikasi [Yu-Gi-Oh! Card Collection Project](https://github.com/andhikapraa/yugioh-card) dengan menggunakan Flutter.
+
+## Tugas 8 Checklist
+*from* [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
+- [ ] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+    - [ ] Memakai minimal tiga elemen input, yaitu `name`, `amount`, `description`. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+    - [ ] Memiliki sebuah tombol `Save`.
+    - [ ] Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+        - [ ] Setiap elemen input tidak boleh kosong.
+        - [ ] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+- [ ] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.
+- [ ] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.
+- [ ] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+    - [ ] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
+    - [ ] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+    - [ ] Ketika memiih opsi (`Tambah Item`), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+- [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+    - [ ] Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+    - [ ] Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!
+    - [ ] Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+    - [ ] Bagaimana penerapan *clean architecture* pada aplikasi Flutter?
+    - [ ] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial)
+- [ ] Melakukan `add`-`commit`-`push` ke GitHub.
+- [ ] *BONUS*:
+    - [ ] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
+
+        > Kamu dapat memanfaatkan objek model untuk mengerjakan fitur ini.
+
+- [ ] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
+
