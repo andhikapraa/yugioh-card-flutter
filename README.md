@@ -439,3 +439,187 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
 
 - [ ] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
 
+### *Refactoring* sebelum memulai tugas 8
+Sebelum memulai tugas 8, kita akan melakukan *refactoring* pada kode program `menu.dart` dan `main.dart` yang telah dibuat pada tugas 7. Kita akan membuat 2 *folder* baru pada direktori `lib`, yaitu `widgets` dan `screens` yang akan digunakan untuk menyimpan *widget* dan *screen* yang akan kita buat selanjutnya. Selain itu, kita akan memindahkan kode program `menu.dart` ke direktori `lib/screens`. Kita juga akan memisahkan `MenuItem` dan `MenuCard` ke dalam *widget* baru bernama `menu_item.dart` dan `menu_card.dart` yang akan kita buat pada direktori `lib/widgets`. Berikut adalah kode program `menu_item.dart`:
+```dart
+import 'package:flutter/material.dart';
+
+class MenuItem {
+  final String title;
+  final IconData icon;
+  final Color color;
+  final Function onTap;
+
+  MenuItem({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.onTap,
+  });
+}
+
+```
+
+Berikut adalah kode program `menu_card.dart`:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/widgets/menu_item.dart';
+
+class MenuCard extends StatelessWidget {
+  final MenuItem item;
+
+  const MenuCard(this.item, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: item.color,
+      child: InkWell(
+        onTap: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(
+              content: Text("Kamu telah menekan tombol ${item.title}!"),
+              duration: const Duration(seconds: 1),
+            ));
+          item.onTap();
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  item.icon,
+                  color: Colors.white,
+                  size: 30.0,
+                ),
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  item.title,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+Berikut adalah kode program `menu.dart`:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/widgets/menu_card.dart';
+
+class Menu extends StatelessWidget {
+  Menu({Key? key}) : super(key: key);
+
+  final List<MenuItem> menuItems = [
+    MenuItem(
+      title: 'Lihat Item',
+      icon: Icons.list,
+      color: const Color(0xFF0D6EFD),
+      onTap: () {},
+    ),
+    MenuItem(
+      title: 'Tambah Item',
+      icon: Icons.add,
+      color: const Color(0xFF198754),
+      onTap: () {},
+    ),
+    MenuItem(
+      title: 'Logout',
+      icon: Icons.logout,
+      color: const Color(0xFFDC3545),
+      onTap: () {},
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Yu-Gi-Oh! Card Collection',
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Text(
+                  'Menu',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              GridView.count(
+                primary: true,
+                padding: const EdgeInsets.all(20.0),
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                children: menuItems.map((item) {
+                  return MenuCard(item);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+Berikut adalah kode program `main.dart`:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Yu-Gi-Oh! Card Collection',
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: const Color(0xFF0D6EFD),
+        scaffoldBackgroundColor: const Color(0xFF001B35),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF001427),
+        ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: Color(0xFF031633),
+          contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
+        ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        useMaterial3: true,
+      ),
+      home: Menu(),
+    );
+  }
+}
+
+```

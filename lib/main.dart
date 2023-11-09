@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yugioh_card/menu.dart';
+import 'package:yugioh_card/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,9 +21,7 @@ class MyApp extends StatelessWidget {
         ),
         snackBarTheme: const SnackBarThemeData(
           backgroundColor: Color(0xFF031633),
-          contentTextStyle: TextStyle(
-            color: Color(0xFF6EA8FE)
-          ),
+          contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
