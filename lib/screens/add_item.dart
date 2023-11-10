@@ -488,7 +488,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {}
+                    if (_formKey.currentState!.validate()) {
+                      showFormData(context, item);
+                    }
                   },
                   child: const Text(
                     'Save',
@@ -502,4 +504,44 @@ class _ItemFormPageState extends State<ItemFormPage> {
       ),
     );
   }
+}
+
+void showFormData(BuildContext context, Item item) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Card Saved Successfully'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Card Name: ${item.name}'),
+              Text('Amount: ${item.amount}'),
+              Text('Description: ${item.description}'),
+              Text('Card Type: ${item.cardType}'),
+              Text('Passcode: ${item.passcode}'),
+              Text('Attribute: ${item.attribute}'),
+              Text('Types: ${item.types}'),
+              Text('Level: ${item.level}'),
+              Text('ATK: ${item.atk}'),
+              Text('DEF: ${item.def}'),
+              Text('Effect Type: ${item.effectType}'),
+              Text('Card Property: ${item.cardProperty}'),
+              Text('Rulings: ${item.rulings}'),
+              item.image ?? const Text('No image selected.'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
 }

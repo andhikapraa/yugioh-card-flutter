@@ -413,14 +413,14 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
 
 ## Tugas 8 Checklist
 *from* [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
-- [ ] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
-    - [ ] Memakai minimal tiga elemen input, yaitu `name`, `amount`, `description`. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
-    - [ ] Memiliki sebuah tombol `Save`.
-    - [ ] Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
-        - [ ] Setiap elemen input tidak boleh kosong.
-        - [ ] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
-- [ ] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.
-- [ ] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.
+- [X] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+    - [X] Memakai minimal tiga elemen input, yaitu `name`, `amount`, `description`. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+    - [X] Memiliki sebuah tombol `Save`.
+    - [X] Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+        - [X] Setiap elemen input tidak boleh kosong.
+        - [X] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
+- [X] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.
+- [X] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.
 - [ ] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
     - [ ] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
     - [ ] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
@@ -603,3 +603,71 @@ class Menu extends StatelessWidget {
 
 ```
 
+### Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru
+Untuk memunculkan data setelah menekan tombol `Save` pada halaman formulir tambah item baru, kita perlu membuat sebuah *function* bernama `showFormData` pada `add_item.dart` yang akan memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up`. Kode program `showFormData` adalah sebagai berikut:
+```dart
+void showFormData(BuildContext context, Item item) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Card Saved Successfully'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Card Name: ${item.name}'),
+              Text('Amount: ${item.amount}'),
+              Text('Description: ${item.description}'),
+              Text('Card Type: ${item.cardType}'),
+              Text('Passcode: ${item.passcode}'),
+              Text('Attribute: ${item.attribute}'),
+              Text('Types: ${item.types}'),
+              Text('Level: ${item.level}'),
+              Text('ATK: ${item.atk}'),
+              Text('DEF: ${item.def}'),
+              Text('Effect Type: ${item.effectType}'),
+              Text('Card Property: ${item.cardProperty}'),
+              Text('Rulings: ${item.rulings}'),
+              item.image ?? const Text('No image selected.'),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+```
+
+Selanjutnya, kita perlu memanggil *function* `showFormData` pada `add_item.dart` ketika tombol `Save` ditekan. Kode program `add_item.dart` setelah *function* `showFormData` dipanggil adalah sebagai berikut:
+```dart
+// add_item.dart
+...
+child: ElevatedButton(
+  style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Colors.indigo,
+    ),
+  ),
+  onPressed: () {
+    if (_formKey.currentState!.validate()) {
+      showFormData(context, item); // Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up`
+    }
+  },
+  child: const Text(
+    'Save',
+    style: TextStyle(
+      color: Colors.white,
+    ),
+  ),
+)
+...
+```
