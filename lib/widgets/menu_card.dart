@@ -12,13 +12,7 @@ class MenuCard extends StatelessWidget {
       color: item.color,
       child: InkWell(
         onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-              content: Text("Kamu telah menekan tombol ${item.title}!"),
-              duration: const Duration(seconds: 1),
-            ));
-          item.onTap();
+          item.onTap(context);
         },
         child: Container(
           padding: const EdgeInsets.all(8),

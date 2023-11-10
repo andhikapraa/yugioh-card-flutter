@@ -4,7 +4,7 @@ class MenuItem {
   final String title;
   final IconData icon;
   final Color color;
-  final Function onTap;
+  final Function(BuildContext context) onTap;
 
   MenuItem({
     required this.title,
