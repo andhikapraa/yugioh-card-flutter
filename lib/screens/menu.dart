@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
 import 'package:yugioh_card/widgets/menu_item.dart';
 import 'package:yugioh_card/widgets/menu_card.dart';
 import 'package:yugioh_card/screens/add_item.dart';
@@ -22,7 +23,7 @@ class Menu extends StatelessWidget {
     ),
     MenuItem(
       title: 'Tambah Item',
-      icon: Icons.add,
+      icon: Icons.add_circle_outline,
       color: const Color(0xFF198754),
       onTap: (BuildContext context) {
         Navigator.push(
@@ -54,6 +55,7 @@ class Menu extends StatelessWidget {
           'Yu-Gi-Oh! Card Collection',
         ),
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),

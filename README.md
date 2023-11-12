@@ -421,10 +421,10 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
         - [X] Setiap elemen input harus berisi data dengan tipe data atribut modelnya.
 - [X] Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol `Tambah Item` pada halaman utama.
 - [X] Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru.
-- [ ] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
-    - [ ] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
-    - [ ] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
-    - [ ] Ketika memiih opsi (`Tambah Item`), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+- [X] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+    - [X] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
+    - [X] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+    - [X] Ketika memiih opsi (`Tambah Item`), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
 - [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
     - [ ] Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
     - [ ] Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!
@@ -443,7 +443,7 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
 Sebelum memulai tugas 8, kita akan melakukan *refactoring* pada kode program `menu.dart` dan `main.dart` yang telah dibuat pada tugas 7. Kita akan membuat 2 *folder* baru pada direktori `lib`, yaitu `widgets` dan `screens` yang akan digunakan untuk menyimpan *widget* dan *screen* yang akan kita buat selanjutnya. Selain itu, kita akan memindahkan kode program `menu.dart` ke direktori `lib/screens`. Kita juga akan memisahkan `MenuItem` dan `MenuCard` ke dalam *widget* baru bernama `menu_item.dart` dan `menu_card.dart` yang akan kita buat pada direktori `lib/widgets`.
 
 ### Membuat halaman form tambah item baru
-Setelah *refactoring* selesai dilakukan, kita akan membuat halaman form tambah item baru berdasarkan model yang telah dibuat di Django. Kita akan membuat *screen* baru bernama `add_item.dart` pada direktori `lib/screens`. Kode program `add_item.dart` bisa dilihat pada [link ini]().
+Setelah *refactoring* selesai dilakukan, kita akan membuat halaman form tambah item baru berdasarkan model yang telah dibuat di Django. Kita akan membuat *screen* baru bernama `add_item.dart` pada direktori `lib/screens`. Kode program `add_item.dart` bisa dilihat pada [link ini](https://github.com/andhikapraa/yugioh-card-flutter/blob/main/lib/screens/add_item.dart).
 > Kode program `add_item.dart` terlalu panjang untuk dimasukkan ke dalam README.md.
 
 ### Mengarahkan pengguna ke halaman form tambah item baru
@@ -671,3 +671,123 @@ child: ElevatedButton(
 )
 ...
 ```
+
+### Membuat sebuah drawer pada aplikasi
+Untuk membuat sebuah drawer pada aplikasi, kita perlu membuat sebuah *widget* bernama `left_drawer.dart` pada direktori `lib/widgets`. Kode program `left_drawer.dart` adalah sebagai berikut:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+import 'package:yugioh_card/screens/add_item.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: [
+        const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF001427),
+            ),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('images/logo.png'),
+                  radius: 40,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                // App Name and Version
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Yu-Gi-Oh!',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Card Collection',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )),
+        Column(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text('Halaman Utama'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Menu()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_circle_outline),
+              title: const Text('Tambah Item'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ItemFormPage()),
+                );
+              },
+            ),
+          ],
+        ),
+      ],
+    ));
+  }
+}
+
+```
+Setelah itu, kita perlu memanggil *widget* `LeftDrawer` pada setiap *screen* yang akan kita buat selanjutnya. Kita akan memanggil *widget* `LeftDrawer` pada `menu.dart` dan `add_item.dart`. Kode program `menu.dart` dan `add_item.dart` setelah *widget* `LeftDrawer` dipanggil adalah sebagai berikut:
+```dart
+// menu.dart
+...
+import 'package:yugioh_card/widgets/left_drawer.dart';
+
+...
+Scaffold(
+  appBar: AppBar(
+    title: const Text(
+      'Yu-Gi-Oh! Card Collection',
+    ),
+  ),
+  drawer: const LeftDrawer(), // Memanggil widget LeftDrawer
+  ...
+)
+
+// add_item.dart
+...
+import 'package:yugioh_card/widgets/left_drawer.dart';
+
+...
+Scaffold(
+  appBar: AppBar(
+    title: const Center(
+      child: Text(
+        'Tambah Item',
+      ),
+    ),
+  drawer: const LeftDrawer(), // Memanggil widget LeftDrawer
+  ...
+)
+```
+
+Dengan demikian, kita telah berhasil membuat sebuah drawer pada aplikasi.
+

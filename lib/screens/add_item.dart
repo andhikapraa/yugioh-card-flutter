@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
 
 class Item {
   String name;
@@ -68,17 +69,26 @@ class _ItemFormPageState extends State<ItemFormPage> {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Produk',
+            'Tambah Item',
           ),
         ),
-        backgroundColor: Colors.indigo,
-        foregroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Card Information',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
@@ -470,9 +480,15 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-              child: SizedBox(
+              child: Container(
                 width: 300,
                 height: 440,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 1,
+                  ),
+                ),
                 child: item.image ?? const Text('No image selected.'),
               ),
             ),
@@ -480,11 +496,15 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-                padding: const EdgeInsets.all(8.0),
+              // Add padding to the bottom and top of the button
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: SizedBox(
+                height: 60.0,
+                width: 300.0,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Colors.indigo,
+                      Theme.of(context).primaryColor,
                     ),
                   ),
                   onPressed: () {
@@ -496,9 +516,12 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     'Save',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 20.0, // Increase font size
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
           )
         ])),
       ),
