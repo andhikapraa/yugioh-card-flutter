@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
 import 'package:yugioh_card/widgets/left_drawer.dart';
 import 'package:yugioh_card/widgets/menu_item.dart';
 import 'package:yugioh_card/widgets/menu_card.dart';
 import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
 
 class Menu extends StatelessWidget {
   Menu({Key? key}) : super(key: key);
@@ -10,15 +12,13 @@ class Menu extends StatelessWidget {
   final List<MenuItem> menuItems = [
     MenuItem(
       title: 'Lihat Item',
-      icon: Icons.list,
+      icon: Icons.list_alt_outlined,
       color: const Color(0xFF0D6EFD),
       onTap: (BuildContext context) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(const SnackBar(
-            content: Text("Kamu telah menekan tombol Lihat Item!"),
-            duration: Duration(seconds: 2),
-          ));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ItemListPage(items: items)),
+        );
       },
     ),
     MenuItem(

@@ -432,11 +432,11 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
     - [ ] Bagaimana penerapan *clean architecture* pada aplikasi Flutter?
     - [ ] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial)
 - [ ] Melakukan `add`-`commit`-`push` ke GitHub.
-- [ ] *BONUS*:
-    - [ ] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
+- [X] *BONUS*:
+    - [X] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
 
         > Kamu dapat memanfaatkan objek model untuk mengerjakan fitur ini.
-    - [ ] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
+    - [X] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
 
 ### *Refactoring* sebelum memulai tugas 8
 Sebelum memulai tugas 8, kita akan melakukan *refactoring* pada kode program `menu.dart` dan `main.dart` yang telah dibuat pada tugas 7. Kita akan membuat 2 *folder* baru pada direktori `lib`, yaitu `widgets` dan `screens` yang akan digunakan untuk menyimpan *widget* dan *screen* yang akan kita buat selanjutnya. Selain itu, kita akan memindahkan kode program `menu.dart` ke direktori `lib/screens`. Kita juga akan memisahkan `MenuItem` dan `MenuCard` ke dalam *widget* baru bernama `menu_item.dart` dan `menu_card.dart` yang akan kita buat pada direktori `lib/widgets`.
@@ -1091,3 +1091,73 @@ class ItemCard extends StatelessWidget {
 }
 
 ```
+
+### Mengarahkan pengguna ke halaman daftar item
+Untuk mengarahkan pengguna ke halaman daftar item, kita perlu mengubah kode program `menu.dart` menjadi seperti berikut:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/widgets/menu_card.dart';
+import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
+
+class Menu extends StatelessWidget {
+  Menu({Key? key}) : super(key: key);
+
+  final List<MenuItem> menuItems = [
+    MenuItem(
+      title: 'Lihat Item',
+      icon: Icons.list_alt_outlined,
+      color: const Color(0xFF0D6EFD),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ItemListPage(items: items)),
+        );
+      },
+    ),
+    ...
+  ];
+  ...
+}
+
+```
+Dan kita juga perlu menambahkan kode program berikut pada `left_drawer.dart`:
+```dart
+...
+import 'package:yugioh_card/screens/item_list.dart';
+import 'package:yugioh_card/models/item.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: [
+        ...
+        Column(
+          children: [
+            ...
+            ListTile(
+              leading: const Icon(Icons.list_alt_outlined),
+              title: const Text('Lihat Item'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ItemListPage(items: items)),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ));
+  }
+}
+
+```
+
+Dengan demikian, implementasi tugas 8 telah selesai dilakukan.

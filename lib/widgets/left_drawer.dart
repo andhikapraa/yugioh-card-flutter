@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yugioh_card/screens/menu.dart';
 import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
+import 'package:yugioh_card/models/item.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({Key? key}) : super(key: key);
@@ -69,6 +71,15 @@ class LeftDrawer extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const ItemFormPage()),
                 );
               },
+            ),
+            ListTile(
+              leading: const Icon(Icons.list_alt_outlined),
+              title: const Text('Lihat Item'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => ItemListPage(items: items)),
+              ),
             ),
           ],
         ),
