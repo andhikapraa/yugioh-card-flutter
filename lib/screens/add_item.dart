@@ -82,6 +82,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '3',
                 labelText: 'Amount',
@@ -98,6 +99,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 if (value == null || value.isEmpty) {
                   return 'Amount is required';
                 }
+                if (int.tryParse(value) == null) {
+                  return 'Amount must be a number';
+                }
                 return null;
               },
             ),
@@ -106,6 +110,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               maxLines: 5,
+              keyboardType: TextInputType.multiline,
               decoration: InputDecoration(
                 hintText:
                     'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
@@ -173,6 +178,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '89631139',
                 labelText: 'Passcode',
@@ -266,6 +272,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '8',
                 labelText: 'Level',
@@ -282,6 +289,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 if (value == null || value.isEmpty) {
                   return 'Level is required';
                 }
+                if (int.tryParse(value) == null) {
+                  return 'Level must be a number';
+                }
                 return null;
               },
             ),
@@ -289,6 +299,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '3000',
                 labelText: 'ATK',
@@ -305,6 +316,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                 if (value == null || value.isEmpty) {
                   return 'ATK is required';
                 }
+                if (int.tryParse(value) == null) {
+                  return 'ATK must be a number';
+                }
                 return null;
               },
             ),
@@ -312,6 +326,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: '2500',
                 labelText: 'DEF',
@@ -327,6 +342,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
               validator: (String? value) {
                 if (value == null || value.isEmpty) {
                   return 'DEF is required';
+                }
+                if (int.tryParse(value) == null) {
+                  return 'DEF must be a number';
                 }
                 return null;
               },
@@ -404,6 +422,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               maxLines: 5,
+              keyboardType: TextInputType.multiline,
               decoration: InputDecoration(
                 hintText: 'None',
                 labelText: 'Rulings',
@@ -492,7 +511,24 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     if (_formKey.currentState!.validate()) {
                       showFormData(context, item);
                       items.add(item);
-                      print(items);
+                      setState(() {
+                        item = Item(
+                          name: '',
+                          amount: 0,
+                          description: '',
+                          cardType: '',
+                          passcode: 0,
+                          attribute: '',
+                          types: '',
+                          level: 0,
+                          atk: 0,
+                          def: 0,
+                          effectType: '',
+                          cardProperty: '',
+                          rulings: '',
+                          imagePath: '',
+                        );
+                      });
                       _formKey.currentState!.reset();
                     }
                   },
