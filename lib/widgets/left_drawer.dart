@@ -56,7 +56,7 @@ class LeftDrawer extends StatelessWidget {
               leading: const Icon(Icons.home_outlined),
               title: const Text('Halaman Utama'),
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => Menu()),
                 );
