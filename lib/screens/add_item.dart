@@ -480,8 +480,8 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   ),
                 ),
                 onPressed: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  final XFile? image = await _picker.pickImage(
+                  final ImagePicker picker = ImagePicker();
+                  final XFile? image = await picker.pickImage(
                     source: ImageSource.gallery,
                     imageQuality: 50,
                     maxWidth: 400,
