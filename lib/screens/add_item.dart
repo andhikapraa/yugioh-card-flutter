@@ -2,40 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yugioh_card/widgets/left_drawer.dart';
-
-class Item {
-  String name;
-  int amount;
-  String description;
-  String cardType;
-  int passcode;
-  String attribute;
-  String types;
-  int level;
-  int atk;
-  int def;
-  String effectType;
-  String cardProperty;
-  String rulings;
-  Image? image;
-
-  Item({
-    required this.name,
-    required this.amount,
-    required this.description,
-    required this.cardType,
-    required this.passcode,
-    required this.attribute,
-    required this.types,
-    required this.level,
-    required this.atk,
-    required this.def,
-    required this.effectType,
-    required this.cardProperty,
-    required this.rulings,
-    required this.image,
-  });
-}
+import 'package:yugioh_card/models/item.dart';
 
 class ItemFormPage extends StatefulWidget {
   const ItemFormPage({Key? key}) : super(key: key);
@@ -60,7 +27,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
     effectType: '',
     cardProperty: '',
     rulings: '',
-    image: null,
+    imagePath: '',
   );
 
   @override
@@ -369,7 +336,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: 'Ignition',
+                hintText: 'Normal',
                 labelText: 'Effect Type',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -459,26 +426,6 @@ class _ItemFormPageState extends State<ItemFormPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () async {
-                final ImagePicker picker = ImagePicker();
-                final XFile? image = await picker.pickImage(
-                  source: ImageSource.gallery,
-                  maxWidth: 1800,
-                  maxHeight: 1800,
-                );
-                setState(() {
-                  item.image = Image.file(
-                    File(image!.path),
-                    fit: BoxFit.cover,
-                  );
-                });
-              },
-              child: const Text('Select Image'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Container(
                 width: 300,
@@ -489,7 +436,42 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     width: 1,
                   ),
                 ),
-                child: item.image ?? const Text('No image selected.'),
+                child: item.imagePath == ''
+                    ? const Center(
+                        child: Text('No image selected.'),
+                      )
+                    : Image.file(
+                        File(item.imagePath),
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).primaryColor,
+                  ),
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                    Colors.white,
+                  ),
+                ),
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  final XFile? image = await _picker.pickImage(
+                    source: ImageSource.gallery,
+                    imageQuality: 50,
+                    maxWidth: 400,
+                  );
+                  setState(() {
+                    item.imagePath = image!.path;
+                  });
+                },
+                child: const Text('Select Image'),
               ),
             ),
           ),
@@ -497,10 +479,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               // Add padding to the bottom and top of the button
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: SizedBox(
-                height: 60.0,
-                width: 300.0,
+                width: 300,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -510,6 +491,9 @@ class _ItemFormPageState extends State<ItemFormPage> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       showFormData(context, item);
+                      items.add(item);
+                      print(items);
+                      _formKey.currentState!.reset();
                     }
                   },
                   child: const Text(
@@ -552,7 +536,15 @@ void showFormData(BuildContext context, Item item) {
               Text('Effect Type: ${item.effectType}'),
               Text('Card Property: ${item.cardProperty}'),
               Text('Rulings: ${item.rulings}'),
-              item.image ?? const Text('No image selected.'),
+              // Show the image
+              item.imagePath == ''
+                  ? const Center(
+                      child: Text('No image selected.'),
+                    )
+                  : Image.file(
+                      File(item.imagePath),
+                      fit: BoxFit.cover,
+                    ),
             ],
           ),
         ),

@@ -791,3 +791,79 @@ Scaffold(
 
 Dengan demikian, kita telah berhasil membuat sebuah drawer pada aplikasi.
 
+### Membuat model `Item`
+Untuk membuat model `Item`, kita perlu membuat sebuah *folder* baru bernama `models` pada direktori `lib`. Selanjutnya, kita akan membuat sebuah *file* bernama `item.dart` pada direktori `lib/models`. Kode program `item.dart` adalah sebagai berikut:
+```dart
+class Item {
+  String name;
+  int amount;
+  String description;
+  String cardType;
+  int passcode;
+  String attribute;
+  String types;
+  int level;
+  int atk;
+  int def;
+  String effectType;
+  String cardProperty;
+  String rulings;
+  String imagePath;
+
+  Item({
+    required this.name,
+    required this.amount,
+    required this.description,
+    required this.cardType,
+    required this.passcode,
+    required this.attribute,
+    required this.types,
+    required this.level,
+    required this.atk,
+    required this.def,
+    required this.effectType,
+    required this.cardProperty,
+    required this.rulings,
+    required this.imagePath,
+  });
+
+  factory Item.fromJson(Map<String, dynamic> json) {
+    return Item(
+      name: json['name'],
+      amount: json['amount'],
+      description: json['description'],
+      cardType: json['card_type'],
+      passcode: json['passcode'],
+      attribute: json['attribute'],
+      types: json['types'],
+      level: json['level'],
+      atk: json['atk'],
+      def: json['deff'],
+      effectType: json['effect_type'],
+      cardProperty: json['card_property'],
+      rulings: json['rulings'],
+      imagePath: json['image'],
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'amount': amount,
+        'description': description,
+        'card_type': cardType,
+        'passcode': passcode,
+        'attribute': attribute,
+        'types': types,
+        'level': level,
+        'atk': atk,
+        'deff': def,
+        'effect_type': effectType,
+        'card_property': cardProperty,
+        'rulings': rulings,
+        'image': imagePath,
+      };
+}
+
+```
+Lalu pada `add_item.dart`, kita akan menggunakan model `Item` yang telah dibuat.
+
