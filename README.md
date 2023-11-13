@@ -436,8 +436,7 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
     - [ ] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
 
         > Kamu dapat memanfaatkan objek model untuk mengerjakan fitur ini.
-
-- [ ] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
+    - [ ] Mengarahkan pengguna ke halaman tersebut jika menekan tombol `Lihat Produk` pada halaman utama atau drawer.
 
 ### *Refactoring* sebelum memulai tugas 8
 Sebelum memulai tugas 8, kita akan melakukan *refactoring* pada kode program `menu.dart` dan `main.dart` yang telah dibuat pada tugas 7. Kita akan membuat 2 *folder* baru pada direktori `lib`, yaitu `widgets` dan `screens` yang akan digunakan untuk menyimpan *widget* dan *screen* yang akan kita buat selanjutnya. Selain itu, kita akan memindahkan kode program `menu.dart` ke direktori `lib/screens`. Kita juga akan memisahkan `MenuItem` dan `MenuCard` ke dalam *widget* baru bernama `menu_item.dart` dan `menu_card.dart` yang akan kita buat pada direktori `lib/widgets`.
@@ -867,3 +866,228 @@ class Item {
 ```
 Lalu pada `add_item.dart`, kita akan menggunakan model `Item` yang telah dibuat.
 
+### Membuat halaman daftar item
+Untuk membuat halaman daftar item, kita perlu membuat sebuah *screen* baru bernama `item_detail.dart` dan `item_list.dart` pada direktori `lib/screens`. Selain itu, kita juga perlu membuat sebuah *widget* baru bernama `item_card.dart` pada direktori `lib/widgets`. Kode program `item_detail.dart`, `item_list.dart`, dan `item_card.dart` adalah sebagai berikut:
+```dart
+// item_detail.dart
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
+
+class ItemDetail extends StatelessWidget {
+  final Item item;
+
+  const ItemDetail({Key? key, required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(item.name),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Column(
+            children: [
+              if (item.imagePath.startsWith('assets'))
+                Image.asset(
+                  item.imagePath,
+                  width: 300,
+                  height: 440,
+                )
+              else
+                Image.file(
+                  File(item.imagePath),
+                  width: 300,
+                  height: 440,
+                ),
+              const Padding(padding: EdgeInsets.all(8)),
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00071f),
+                  border: Border.all(color: const Color(0xFF1D3E67)),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Amount: ${item.amount}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "${item.cardType} | ${item.attribute} | ${item.level}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.effectType,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "[${item.types}]",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.description,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "ATK/ ${item.atk} DEF/ ${item.def}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "#${item.passcode}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.cardProperty,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.rulings,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// item_list.dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:yugioh_card/widgets/item_card.dart';
+
+class ItemListPage extends StatelessWidget {
+  final List<Item> items;
+
+  const ItemListPage({Key? key, required this.items}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: const LeftDrawer(),
+      appBar: AppBar(
+        title: const Text('Item List'),
+      ),
+      body: GridView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: items.length,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 0.7,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
+        itemBuilder: (context, index) {
+          return ItemCard(items[index]);
+        },
+      ),
+    );
+  }
+}
+
+// item_card.dart
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:yugioh_card/screens/item_detail.dart';
+
+class ItemCard extends StatelessWidget {
+  final Item item;
+
+  const ItemCard(this.item, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ItemDetail(item: item)));
+        },
+        child: Stack(
+          children: [
+            if (item.imagePath.startsWith('assets'))
+              Image.asset(
+                item.imagePath,
+                width: 300,
+                height: 440,
+              )
+            else
+              Image.file(
+                File(item.imagePath),
+                width: 300,
+                height: 440,
+              ),
+            Positioned(
+              bottom: 5,
+              left: 5,
+              child: CircleAvatar(
+                backgroundColor: Colors.black.withOpacity(0.5),
+                radius: 20,
+                child: Text(
+                  item.amount.toString(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
