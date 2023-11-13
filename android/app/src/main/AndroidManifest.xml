@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pras.yugioh_card">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="Yu-Gi-Oh! Card Collection"
         android:name="${applicationName}"
