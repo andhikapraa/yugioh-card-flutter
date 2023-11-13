@@ -21,7 +21,7 @@ Kelas  : PBP C
 
 ## Task Checklist
 - [X] [Tugas 7: Elemen Dasar Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-7)
-- [ ] [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
+- [X] [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
 
 # Table of Contents
 
@@ -38,6 +38,19 @@ Kelas  : PBP C
 &emsp;&emsp;&emsp;[**Sebutkan seluruh _widget_ yang kamu gunakan untuk menyelesaikan tugas ini dan jelaskan fungsinya masing-masing.**](<#Sebutkan-seluruh-widget-yang-kamu-gunakan-untuk-menyelesaikan-tugas-ini-dan-jelaskan-fungsinya-masing-masing>)<br />
 [**Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements**](<#Tugas-8-Flutter-Navigation-Layouts-Forms-and-Input-Elements>)<br />
 &emsp;[**Tugas 8 Checklist**](<#Tugas-8-Checklist>)<br />
+&emsp;&emsp;[**Refactoring sebelum memulai tugas 8**](<#Refactoring-sebelum-memulai-tugas-8>)<br />
+&emsp;&emsp;[**Membuat halaman form tambah item baru**](<#Membuat-halaman-form-tambah-item-baru>)<br />
+&emsp;&emsp;[**Mengarahkan pengguna ke halaman form tambah item baru**](<#Mengarahkan-pengguna-ke-halaman-form-tambah-item-baru>)<br />
+&emsp;&emsp;[**Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah `pop-up` setelah menekan tombol `Save` pada halaman formulir tambah item baru**](<#Memunculkan-data-sesuai-isi-dari-formulir-yang-diisi-dalam-sebuah-pop-up-setelah-menekan-tombol-Save-pada-halaman-formulir-tambah-item-baru>)<br />
+&emsp;&emsp;[**Membuat sebuah drawer pada aplikasi**](<#Membuat-sebuah-drawer-pada-aplikasi>)<br />
+&emsp;&emsp;[**Membuat model `Item`**](<#Membuat-model-Item>)<br />
+&emsp;&emsp;[**Membuat halaman daftar item**](<#Membuat-halaman-daftar-item>)<br />
+&emsp;&emsp;[**Mengarahkan pengguna ke halaman daftar item**](<#Mengarahkan-pengguna-ke-halaman-daftar-item>)<br />
+&emsp;&emsp;[**Menjawab pertanyaan-pertanyaan tugas 8**](<#Menjawab-pertanyaan-pertanyaan-tugas-8>)<br />
+&emsp;&emsp;&emsp;[**Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!**](<#Jelaskan-perbedaan-antara-Navigatorpush-dan-NavigatorpushReplacement-disertai-dengan-contoh-mengenai-penggunaan-kedua-metode-tersebut-yang-tepat>)<br />
+&emsp;&emsp;&emsp;[**Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!**](<#Jelaskan-masing-masing-layout-widget-pada-Flutter-dan-konteks-penggunaannya-masing-masing>)<br />
+&emsp;&emsp;&emsp;[**Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!**](<#Sebutkan-apa-saja-elemen-input-pada-form-yang-kamu-pakai-pada-tugas-kali-ini-dan-jelaskan-mengapa-kamu-menggunakan-elemen-input-tersebut>)<br />
+&emsp;&emsp;&emsp;[**Bagaimana penerapan *clean architecture* pada aplikasi Flutter?**](<#Bagaimana-penerapan-clean-architecture-pada-aplikasi-Flutter>)<br />
 
 
 # Tugas 7: Elemen Dasar Flutter
@@ -425,13 +438,13 @@ Mengimplementasikan _navigation_, _layouts_, _forms_, dan _input elements_ pada 
     - [X] Drawer minimal memiliki dua buah opsi, yaitu `Halaman Utama` dan `Tambah Item`.
     - [X] Ketika memiih opsi `Halaman Utama`, maka aplikasi akan mengarahkan pengguna ke halaman utama.
     - [X] Ketika memiih opsi (`Tambah Item`), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
-- [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
-    - [ ] Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
-    - [ ] Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!
-    - [ ] Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
-    - [ ] Bagaimana penerapan *clean architecture* pada aplikasi Flutter?
-    - [ ] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial)
-- [ ] Melakukan `add`-`commit`-`push` ke GitHub.
+- [X] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+    - [X] Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+    - [X] Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!
+    - [X] Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+    - [X] Bagaimana penerapan *clean architecture* pada aplikasi Flutter?
+    - [X] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial)
+- [X] Melakukan `add`-`commit`-`push` ke GitHub.
 - [X] *BONUS*:
     - [X] Membuat sebuah halaman baru, yaitu halaman daftar item yang sudah dibuat dengan isi halamannya adalah setiap data produk yang sudah pernah dibuat.
 
@@ -1161,3 +1174,51 @@ class LeftDrawer extends StatelessWidget {
 ```
 
 Dengan demikian, implementasi tugas 8 telah selesai dilakukan.
+
+### Menjawab pertanyaan-pertanyaan tugas 8
+#### Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()`, disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+`Navigator.push()` dan `Navigator.pushReplacement()` merupakan *method* yang digunakan untuk mengarahkan pengguna ke halaman lain. Perbedaan utama antara `Navigator.push()` dan `Navigator.pushReplacement()` adalah bahwa `Navigator.push()` akan menambahkan halaman baru ke dalam *stack* halaman sedangkan `Navigator.pushReplacement()` akan mengganti halaman yang sedang ditampilkan dengan halaman baru.
+
+Contoh penggunaan `Navigator.push()` adalah sebagai berikut:
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => const ItemFormPage()),
+);
+```
+Dengan kode program di atas, kita akan mengarahkan pengguna ke halaman form tambah item baru ketika tombol `Tambah Item` pada halaman utama ditekan dan halaman form tambah item baru akan ditambahkan ke dalam *stack* halaman.
+
+Contoh penggunaan `Navigator.pushReplacement()` adalah sebagai berikut:
+```dart
+Navigator.pushReplacement(
+  context,
+  MaterialPageRoute(builder: (context) => Menu()),
+);
+```
+Dengan kode program di atas, kita akan mengarahkan pengguna ke halaman utama ketika tombol `Halaman Utama` pada drawer ditekan dan halaman utama akan menggantikan halaman yang sedang ditampilkan.
+
+#### Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!
+*Layout* widget pada Flutter adalah *widget* yang digunakan untuk mengatur tata letak dari *widget* lainnya. Berikut adalah beberapa *layout* widget pada Flutter:
+
+|    Widget    | Deskripsi | Konteks penggunaan |
+|--------------|-----------|--------------------|
+| `Container`  | Mengatur ukuran, warna, dan margin *widget* *child*. | Dasar untuk semua *layout* widget. Dapat digunakan untuk mengatur ukuran, warna, dan margin *widget* lainnya. |
+|    `Row`     | Mengatur *widget* *child* secara horizontal. | Menampilkan daftar item, seperti menu, daftar belanja, atau daftar lagu. |
+|   `Column`   | Mengatur *widget* *child* secara vertikal. | Menampilkan teks, gambar, atau video. |
+|  `ListView`  | Mengatur *widget* *child* secara vertikal dengan *scrolling*. | Menampilkan daftar item yang panjang, seperti daftar berita, daftar kontak, atau daftar produk. |
+|  `GridView`  | Mengatur *widget* *child* secara vertikal dan horizontal dengan *scrolling*. | Menampilkan gambar, foto, atau produk. |
+|   `Stack`    | Mengatur *widget* *child* agar dapat tumpang tindih. | Menampilkan komponen UI yang saling tumpang tindih, seperti tombol dan menu. |
+|    `Wrap`    | Mengatur *widget* *child* secara horizontal dan vertikal. | Menampilkan daftar item yang dapat digulir ke kanan dan ke kiri, seperti daftar berita atau daftar kontak. |
+|  `Expanded`  | Mengatur *widget* *child* agar dapat mengisi ruang yang tersedia. | Menampilkan komponen UI yang harus mengisi ruang yang tersedia, seperti tombol atau menu. |
+|  `Flexible`  | Mengatur *widget* *child* agar dapat mengisi ruang yang tersedia dengan ukuran yang dapat berubah. | Menampilkan komponen UI yang ukurannya dapat disesuaikan dengan ukuran layar, seperti teks atau gambar. |
+| `Positioned` | Mengatur *widget* *child* agar dapat ditempatkan pada posisi tertentu. | Menampilkan komponen UI pada posisi tertentu, seperti tombol atau menu. |
+|  `SizedBox`  | Mengatur ukuran *widget* *child*. | Mengatur ukuran *widget* *child* secara spesifik. |
+|   `Spacer`   | Mengatur jarak antar *widget* *child*. | Mengatur jarak antar *widget* *child* secara spesifik. |
+
+#### Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+Elemen input pada form yang saya pakai pada tugas kali ini adalah `TextFormField`, `DropdownButtonFormField`, dan `ElevatedButton`. Saya menggunakan `TextFormField` karena elemen input ini dapat digunakan untuk membuat *text field* yang dapat divalidasi. Saya menggunakan `DropdownButtonFormField` karena elemen input ini dapat digunakan untuk membuat *dropdown* yang dapat divalidasi. Saya menggunakan `ElevatedButton` karena elemen input ini dapat digunakan untuk membuat tombol untuk mengupload gambar dan menyimpan data.
+
+#### Bagaimana penerapan *clean architecture* pada aplikasi Flutter?
+*Clean architecture* adalah sebuah arsitektur yang memisahkan kode program menjadi beberapa *layer* yang saling terhubung untuk meningkatkan fleksibilitas dan memudahkan pengujian. *Clean architecture* terdiri dari 3 *layer*, yaitu *presentation layer*, *domain layer*, dan *data layer*. *Presentation layer* adalah *layer* yang berisi kode program yang berhubungan dengan *user interface* dan *user input*. *Domain layer* adalah *layer* yang berisi kode program yang berhubungan dengan bisnis logika. *Data layer* adalah *layer* yang berisi kode program yang berhubungan dengan *database* dan *API*.
+
+Pada aplikasi Flutter, penerapan *clean architecture* dapat dilakukan dengan memisahkan kode program menjadi beberapa *folder* yang saling terhubung. *Folder* yang berisi kode program yang berhubungan dengan *user interface* dan *user input* adalah `lib/screens` dan `lib/widgets`. *Folder* yang berisi kode program yang berhubungan dengan bisnis logika adalah `lib/models`. *Folder* yang berisi kode program yang berhubungan dengan *database* dan *API* adalah `lib/services`. Setelah itu, untuk menghubungkan masing-masing *layer*, kita dapat menggunakan *dependency injection*.
