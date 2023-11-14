@@ -508,28 +508,14 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate() &&
+                        item.imagePath != '') {
                       showFormData(context, item);
                       items.add(item);
-                      setState(() {
-                        item = Item(
-                          name: '',
-                          amount: 0,
-                          description: '',
-                          cardType: '',
-                          passcode: 0,
-                          attribute: '',
-                          types: '',
-                          level: 0,
-                          atk: 0,
-                          def: 0,
-                          effectType: '',
-                          cardProperty: '',
-                          rulings: '',
-                          imagePath: '',
-                        );
-                      });
                       _formKey.currentState!.reset();
+                      setState(() {
+                        item.imagePath = '';
+                      });
                     }
                   },
                   child: const Text(
