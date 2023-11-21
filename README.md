@@ -1222,3 +1222,366 @@ Elemen input pada form yang saya pakai pada tugas kali ini adalah `TextFormField
 *Clean architecture* adalah sebuah arsitektur yang memisahkan kode program menjadi beberapa *layer* yang saling terhubung untuk meningkatkan fleksibilitas dan memudahkan pengujian. *Clean architecture* terdiri dari 3 *layer*, yaitu *presentation layer*, *domain layer*, dan *data layer*. *Presentation layer* adalah *layer* yang berisi kode program yang berhubungan dengan *user interface* dan *user input*. *Domain layer* adalah *layer* yang berisi kode program yang berhubungan dengan bisnis logika. *Data layer* adalah *layer* yang berisi kode program yang berhubungan dengan *database* dan *API*.
 
 Pada aplikasi Flutter, penerapan *clean architecture* dapat dilakukan dengan memisahkan kode program menjadi beberapa *folder* yang saling terhubung. *Folder* yang berisi kode program yang berhubungan dengan *user interface* dan *user input* adalah `lib/screens` dan `lib/widgets`. *Folder* yang berisi kode program yang berhubungan dengan bisnis logika adalah `lib/models`. *Folder* yang berisi kode program yang berhubungan dengan *database* dan *API* adalah `lib/services`. Setelah itu, untuk menghubungkan masing-masing *layer*, kita dapat menggunakan *dependency injection*.
+
+
+# Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter
+Mengintegrasikan layanan web Django yang telah dibuat pada tugas 6 dengan aplikasi Yu-Gi-Oh! Card Collection Flutter.
+
+## Tugas 9 Checklist
+*from* [Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-9)
+- [X] Memastikan *deployment* proyek tugas Django kamu telah berjalan dengan baik.
+- [X] Membuat halaman login pada proyek tugas Flutter.
+- [X] Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+- [ ] Membuat model kustom sesuai dengan proyek aplikasi Django.
+- [ ] Membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kamu *deploy*.
+    - [ ] Tampilkan *name*, *amount*, dan *description* dari masing-masing item pada halaman ini.
+- [ ] Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+    - [ ] Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
+    - [ ] Tampilkan seluruh atribut pada model item kamu pada halaman ini.
+    - [ ] Tambahkan tombol untuk kembali ke halaman daftar item.
+- [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+    - [ ] Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+    - [ ] Jelaskan fungsi dari CookieRequest dan jelaskan mengapa *instance* CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+    - [ ] Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+    - [ ] Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+    - [ ] Sebutkan seluruh *widget* yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+    - [ ] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial).
+- [ ] Melakukan `add`-`commit`-`push` ke GitHub.
+- [ ] *BONUS*:
+    - [ ] Mengimplementasikan fitur registrasi akun pada aplikasi Flutter.
+    - [ ] Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+
+
+### Setup *authentication* pada Django
+Sebelum memulai tugas 9, kita perlu melakukan setup *authentication* pada Django. Untuk melakukan setup *authentication* pada Django, kita perlu melakukan langkah-langkah sebagai berikut:
+1. Membuat `django-app` baru bernama `authentication` dengan menggunakan *command* `python manage.py startapp authentication` dan menambahkan `authentication` pada `INSTALLED_APPS` pada `settings.py`.
+2. Menginstall `django-cors-headers` dengan menggunakan *command* `pip install django-cors-headers` dan menambahkan `corsheaders` pada `INSTALLED_APPS` pada `settings.py` dan `corsheaders.middleware.CorsMiddleware` pada `MIDDLEWARE` pada `settings.py`.
+3. Menambahkan beberapa variabel berikut pada `settings.py`:
+    ```python
+    CORS_ALLOW_ALL_ORIGINS = True
+    CORS_ALLOW_CREDENTIALS = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = 'None'
+    SESSION_COOKIE_SAMESITE = 'None'
+    ```
+4. Membuat *view* baru bernama `register`, `login`, dan `logout` pada `views.py` dan menambahkan *path* baru pada `urls.py`. Berikut adalah kode program `views.py` dan `urls.py` setelah *view* dan *path* baru ditambahkan:
+    ```python
+    # views.py
+    from django.http import JsonResponse
+    from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+    from django.views.decorators.csrf import csrf_exempt
+    from django.contrib.auth.models import User
+
+
+    @csrf_exempt
+    def login(request):
+        if request.method == "POST":
+            username = request.POST["username"]
+            password = request.POST["password"]
+            user = authenticate(request, username=username, password=password)
+
+            if user:
+                if user.is_active:
+                    auth_login(request, user)
+                    return JsonResponse({
+                        "username": user.username,
+                        "status": True,
+                        "message": "Login successful"
+                    }, status=200)
+                else:
+                    return JsonResponse({
+                        "status": False,
+                        "message": "Account disabled"
+                    }, status=401)
+            else:
+                return JsonResponse({
+                    "status": False,
+                    "message": "Invalid login details"
+                }, status=401)
+        else:
+            return JsonResponse({
+                "status": False,
+                "message": "Invalid request"
+            }, status=400)
+
+
+    @csrf_exempt
+    def logout(request):
+        if request.method == "POST":
+            auth_logout(request)
+            return JsonResponse({
+                "status": True,
+                "message": "Logout successful"
+            }, status=200)
+        else:
+            return JsonResponse({
+                "status": False,
+                "message": "Invalid request"
+            }, status=400)
+
+
+    @csrf_exempt
+    def register(request):
+        if request.method == "POST":
+            username = request.POST["username"]
+            password = request.POST["password"]
+            password2 = request.POST["password2"]
+            if password != password2:
+                return JsonResponse({
+                    "status": False,
+                    "message": "Passwords do not match"
+                }, status=400)
+            if User.objects.filter(username=username).exists():
+                return JsonResponse({
+                    "status": False,
+                    "message": "Username already exists"
+                }, status=400)
+            user = User.objects.create_user(username=username, password=password)
+            user.save()
+            return JsonResponse({
+                "status": True,
+                "message": "Successfully registered as " + username
+            }, status=200)
+        else:
+            return JsonResponse({
+                "status": False,
+                "message": "Invalid request"
+            }, status=400)
+    ```
+    ```python
+    # urls.py
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path("login", views.login, name="login"),
+        path("logout", views.logout, name="logout"),
+        path("register", views.register, name="register"),
+    ]
+    ```
+5. Menambahkan *path* baru pada `urls.py` pada `yugioh_card`:
+    ```python
+    # urls.py
+    from django.contrib import admin
+    from django.urls import path, include
+    from django.conf import settings
+    from django.conf.urls.static import static
+
+    urlpatterns = [
+        path("admin/", admin.site.urls),
+        path("", include("main.urls")),
+        path("auth/", include("authentication.urls")),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ```
+Dengan demikian, setup *authentication* pada Django telah selesai dilakukan.
+
+### Membuat halaman login pada proyek tugas Flutter
+Setelah setup *authentication* pada Django selesai dilakukan, kita akan membuat halaman login pada proyek tugas Flutter. Sebelum membuat halaman login, kita perlu menginstall `provider` dan `pbp_django_auth` terlebih dahulu dengan menjalankan perintah berikut pada terminal:
+```console
+flutter pub add provider
+flutter pub add pbp_django_auth
+```
+Setelah itu, kita perlu memodifikasi `root widget` pada `main.dart` menjadi seperti berikut:
+```dart
+// main.dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'Yu-Gi-Oh! Card Collection',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: const Color(0xFF0D6EFD),
+          scaffoldBackgroundColor: const Color(0xFF001B35),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF001427),
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xFF001B35),
+          ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: Color(0xFF031633),
+            contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: true,
+        ),
+        home: Menu(),
+      ),
+    );
+  }
+}
+
+```
+Selanjutnya, kita perlu membuat halaman login pada `lib/screens/login.dart`. Kode program `login.dart` adalah sebagai berikut:
+```dart
+// login.dart
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+
+void main() {
+  runApp(const LoginApp());
+}
+
+class LoginApp extends StatelessWidget {
+  const LoginApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Login',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: const Color(0xFF0D6EFD),
+          scaffoldBackgroundColor: const Color(0xFF001B35),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF001427),
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xFF001B35),
+          ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: Color(0xFF031633),
+            contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: true,
+        ),
+        home: const LoginPage());
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final request = Provider.of<CookieRequest>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        centerTitle: true,
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+              onPressed: () async {
+                String username = _usernameController.text;
+                String password = _passwordController.text;
+
+                final response = await request
+                    .login("https://pras-yugioh-card.onrender.com/auth/login", {
+                  "username": username,
+                  "password": password,
+                });
+
+                if (request.loggedIn) {
+                  String message = response["message"];
+                  String uname = response["username"];
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text("$message! Welcome $uname!"),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("Login Failed"),
+                      content: Text(response["message"]),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: const Text(
+                'Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0, // Increase font size
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
