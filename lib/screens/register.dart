@@ -1,61 +1,30 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:yugioh_card/screens/menu.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:yugioh_card/screens/register.dart';
+import 'package:yugioh_card/screens/login.dart';
 
-void main() {
-  runApp(const LoginApp());
-}
-
-class LoginApp extends StatelessWidget {
-  const LoginApp({Key? key}) : super(key: key);
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Login',
-        theme: ThemeData(
-          brightness: Brightness.dark,
-          primaryColor: const Color(0xFF0D6EFD),
-          scaffoldBackgroundColor: const Color(0xFF001B35),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFF001427),
-          ),
-          drawerTheme: const DrawerThemeData(
-            backgroundColor: Color(0xFF001B35),
-          ),
-          snackBarTheme: const SnackBarThemeData(
-            backgroundColor: Color(0xFF031633),
-            contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
-          ),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          useMaterial3: true,
-        ),
-        home: const LoginPage());
-  }
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
+class _RegisterScreenState extends State {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _password2Controller = TextEditingController();
   bool _obscureText = true;
+  bool _obscureText2 = true;
 
   @override
   Widget build(BuildContext context) {
     final request = Provider.of<CookieRequest>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Register'),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -114,17 +83,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+            TextField(
+              controller: _password2Controller,
+              obscureText: _obscureText2,
+              decoration: InputDecoration(
+                labelText: 'Verify Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText2 ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText2 = !_obscureText2;
+                    });
+                  },
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
             TextButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const RegisterScreen()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
               child: const Text(
-                'Don\'t have an account? Register here!',
+                'Have an account? Login',
                 style: TextStyle(
                   color: Color(0xFF6EA8FE),
                   fontSize: 16.0,
@@ -139,33 +124,30 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               onPressed: () async {
-                String username = _usernameController.text;
-                String password = _passwordController.text;
-
-                final response = await request
-                    .login("https://pras-yugioh-card.onrender.com/auth/login", {
-                  "username": username,
-                  "password": password,
+                final response = await request.post(
+                    "https://pras-yugioh-card.onrender.com/auth/register", {
+                  "username": _usernameController.text,
+                  "password": _passwordController.text,
+                  "password2": _password2Controller.text,
                 });
-
-                if (request.loggedIn) {
-                  String message = response["message"];
-                  String uname = response["username"];
-                  Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => Menu()));
+                if (response['status']) {
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
                     ..showSnackBar(
                       SnackBar(
-                        content: Text("$message! Welcome $uname!"),
+                        content: Text(response['message']),
                         duration: const Duration(seconds: 2),
                       ),
                     );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
                 } else {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text("Login Failed"),
+                      title: const Text("Register Failed"),
                       content: Text(response["message"]),
                       actions: [
                         TextButton(
@@ -180,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
               child: const Text(
-                'Login',
+                'Register',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16.0,

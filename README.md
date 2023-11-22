@@ -22,6 +22,7 @@ Kelas  : PBP C
 ## Task Checklist
 - [X] [Tugas 7: Elemen Dasar Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-7)
 - [X] [Tugas 8: Flutter Navigation, Layouts, Forms, and Input Elements](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-8)
+- [X] [Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter](https://pbp-fasilkom-ui.github.io/ganjil-2024/assignments/individual/assignment-9)
 
 # Table of Contents
 
@@ -51,6 +52,22 @@ Kelas  : PBP C
 &emsp;&emsp;&emsp;[**Jelaskan masing-masing *layout* widget pada Flutter dan konteks penggunaannya masing-masing!**](<#Jelaskan-masing-masing-layout-widget-pada-Flutter-dan-konteks-penggunaannya-masing-masing>)<br />
 &emsp;&emsp;&emsp;[**Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!**](<#Sebutkan-apa-saja-elemen-input-pada-form-yang-kamu-pakai-pada-tugas-kali-ini-dan-jelaskan-mengapa-kamu-menggunakan-elemen-input-tersebut>)<br />
 &emsp;&emsp;&emsp;[**Bagaimana penerapan *clean architecture* pada aplikasi Flutter?**](<#Bagaimana-penerapan-clean-architecture-pada-aplikasi-Flutter>)<br />
+[**Tugas 9: Integrasi Layanan Web Django dengan Aplikasi Flutter**](<#Tugas-9-Integrasi-Layanan-Web-Django-dengan-Aplikasi-Flutter>)<br />
+&emsp;[**Tugas 9 Checklist**](<#Tugas-9-Checklist>)<br />
+&emsp;&emsp;[**Setup *authentication* pada Django**](<#Setup-authentication-pada-Django>)<br />
+&emsp;&emsp;[**Membuat halaman login pada proyek tugas Flutter**](<#Membuat-halaman-login-pada-proyek-tugas-Flutter>)<br />
+&emsp;&emsp;[**Membuat model kustom sesuai dengan proyek aplikasi Django**](<#Membuat-model-kustom-sesuai-dengan-proyek-aplikasi-Django>)<br />
+&emsp;&emsp;[**Membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kamu *deploy***](<#Membuat-halaman-yang-berisi-daftar-semua-item-yang-terdapat-pada-endpoint-JSON-di-Django-yang-telah-kamu-deploy>)<br />
+&emsp;&emsp;[**Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item**](<#Membuat-halaman-detail-untuk-setiap-item-yang-terdapat-pada-halaman-daftar-Item>)<br />
+&emsp;&emsp;[**Mengubah kode program `menu.dart`, `left_drawer.dart`, dan `add_item.dart` sesuai dengan perubahan model `Item`**](<#Mengubah-kode-program-menu.dart-left_drawer.dart-dan-add_item.dart-sesuai-dengan-perubahan-model-Item>)<br />
+&emsp;&emsp;[**Membuat *register* pada aplikasi Flutter**](<#Membuat-register-pada-aplikasi-Flutter>)<br />
+&emsp;&emsp;[**Melakukan *filter* untuk daftar item**](<#Melakukan-filter-untuk-daftar-item>)<br />
+&emsp;&emsp;[**Menjawab pertanyaan-pertanyaan tugas 9**](<#Menjawab-pertanyaan-pertanyaan-tugas-9>)<br />
+&emsp;&emsp;&emsp;[**Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?**](<#Apakah-bisa-kita-melakukan-pengambilan-data-JSON-tanpa-membuat-model-terlebih-dahulu-Jika-iya-apakah-hal-tersebut-lebih-baik-daripada-membuat-model-sebelum-melakukan-pengambilan-data-JSON>)<br />
+&emsp;&emsp;&emsp;[**Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.**](<#Jelaskan-fungsi-dari-CookieRequest-dan-jelaskan-mengapa-instance-CookieRequest-perlu-untuk-dibagikan-ke-semua-komponen-di-aplikasi-Flutter>)<br />
+&emsp;&emsp;&emsp;[**Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.**](<#Jelaskan-mekanisme-pengambilan-data-dari-JSON-hingga-dapat-ditampilkan-pada-Flutter>)<br />
+&emsp;&emsp;&emsp;[**Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.**](<#Jelaskan-mekanisme-autentikasi-dari-input-data-akun-pada-Flutter-ke-Django-hingga-selesainya-proses-autentikasi-oleh-Django-dan-tampilnya-menu-pada-Flutter>)<br />
+&emsp;&emsp;&emsp;[**Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.**](<#Sebutkan-seluruh-widget-yang-kamu-pakai-pada-tugas-ini-dan-jelaskan-fungsinya-masing-masing>)<br />
 
 
 # Tugas 7: Elemen Dasar Flutter
@@ -1232,24 +1249,24 @@ Mengintegrasikan layanan web Django yang telah dibuat pada tugas 6 dengan aplika
 - [X] Memastikan *deployment* proyek tugas Django kamu telah berjalan dengan baik.
 - [X] Membuat halaman login pada proyek tugas Flutter.
 - [X] Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
-- [ ] Membuat model kustom sesuai dengan proyek aplikasi Django.
-- [ ] Membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kamu *deploy*.
-    - [ ] Tampilkan *name*, *amount*, dan *description* dari masing-masing item pada halaman ini.
-- [ ] Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
-    - [ ] Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
-    - [ ] Tampilkan seluruh atribut pada model item kamu pada halaman ini.
-    - [ ] Tambahkan tombol untuk kembali ke halaman daftar item.
-- [ ] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
-    - [ ] Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
-    - [ ] Jelaskan fungsi dari CookieRequest dan jelaskan mengapa *instance* CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
-    - [ ] Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
-    - [ ] Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
-    - [ ] Sebutkan seluruh *widget* yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
-    - [ ] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial).
-- [ ] Melakukan `add`-`commit`-`push` ke GitHub.
-- [ ] *BONUS*:
-    - [ ] Mengimplementasikan fitur registrasi akun pada aplikasi Flutter.
-    - [ ] Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
+- [X] Membuat model kustom sesuai dengan proyek aplikasi Django.
+- [X] Membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kamu *deploy*.
+    - [X] Tampilkan *name*, *amount*, dan *description* dari masing-masing item pada halaman ini.
+- [X] Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+    - [X] Halaman ini dapat diakses dengan menekan salah satu item pada halaman daftar Item.
+    - [X] Tampilkan seluruh atribut pada model item kamu pada halaman ini.
+    - [X] Tambahkan tombol untuk kembali ke halaman daftar item.
+- [X] Menjawab beberapa pertanyaan berikut pada `README.md` pada *root folder* (silakan modifikasi `README.md` yang telah kamu buat sebelumnya; tambahkan subjudul untuk setiap tugas).
+    - [X] Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+    - [X] Jelaskan fungsi dari CookieRequest dan jelaskan mengapa *instance* CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+    - [X] Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+    - [X] Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+    - [X] Sebutkan seluruh *widget* yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+    - [X] Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step*! (bukan hanya sekadar mengikuti tutorial).
+- [X] Melakukan `add`-`commit`-`push` ke GitHub.
+- [X] *BONUS*:
+    - [X] Mengimplementasikan fitur registrasi akun pada aplikasi Flutter.
+    - [X] Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.
 
 
 ### Setup *authentication* pada Django
@@ -1585,3 +1602,1782 @@ class _LoginPageState extends State<LoginPage> {
 
 ```
 
+### Membuat model kustom sesuai dengan proyek aplikasi Django
+Setelah membuat halaman login pada proyek tugas Flutter, kita akan membuat model kustom sesuai dengan proyek aplikasi Django. Karena sebelumnya kita telah membuat model `Item` pada tugas 8, kita akan mengubahnya dengan hasil *covert* dari *JSON to Dart* dari situs [quicktype.io](https://app.quicktype.io/). Berikut adalah kode program `item.dart` setelah diubah:
+```dart
+// To parse this JSON data, do
+//
+//     final item = itemFromJson(jsonString);
+
+import 'dart:convert';
+
+List<Item> itemFromJson(String str) => List<Item>.from(json.decode(str).map((x) => Item.fromJson(x)));
+
+String itemToJson(List<Item> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class Item {
+    String model;
+    int pk;
+    Fields fields;
+
+    Item({
+        required this.model,
+        required this.pk,
+        required this.fields,
+    });
+
+    factory Item.fromJson(Map<String, dynamic> json) => Item(
+        model: json["model"],
+        pk: json["pk"],
+        fields: Fields.fromJson(json["fields"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "model": model,
+        "pk": pk,
+        "fields": fields.toJson(),
+    };
+}
+
+class Fields {
+    String name;
+    int amount;
+    String description;
+    String cardType;
+    int passcode;
+    String attribute;
+    String types;
+    int level;
+    int atk;
+    int deff;
+    String effectType;
+    String cardProperty;
+    String rulings;
+    String image;
+    int user;
+
+    Fields({
+        required this.name,
+        required this.amount,
+        required this.description,
+        required this.cardType,
+        required this.passcode,
+        required this.attribute,
+        required this.types,
+        required this.level,
+        required this.atk,
+        required this.deff,
+        required this.effectType,
+        required this.cardProperty,
+        required this.rulings,
+        required this.image,
+        required this.user,
+    });
+
+    factory Fields.fromJson(Map<String, dynamic> json) => Fields(
+        name: json["name"],
+        amount: json["amount"],
+        description: json["description"],
+        cardType: json["card_type"],
+        passcode: json["passcode"],
+        attribute: json["attribute"],
+        types: json["types"],
+        level: json["level"],
+        atk: json["atk"],
+        deff: json["deff"],
+        effectType: json["effect_type"],
+        cardProperty: json["card_property"],
+        rulings: json["rulings"],
+        image: json["image"],
+        user: json["user"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "name": name,
+        "amount": amount,
+        "description": description,
+        "card_type": cardType,
+        "passcode": passcode,
+        "attribute": attribute,
+        "types": types,
+        "level": level,
+        "atk": atk,
+        "deff": deff,
+        "effect_type": effectType,
+        "card_property": cardProperty,
+        "rulings": rulings,
+        "image": image,
+        "user": user,
+    };
+}
+  
+```
+> Karena model `Item` sebelumnya diubah, maka diperlukan perubahan pada kode program `item_detail.dart`, `item_list.dart`, `add_item.dart`, dan `menu.dart` pada `lib/screens` dan `item_card.dart` dan `left_drawer.dart` pada `lib/widgets`. Perubahan akan dilakukan seiring dengan pengerjaan tugas 9.
+
+### Membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kamu *deploy*
+Sebelum itu, perlu *package* tambahan bernama `http` dengan menjalankan perintah berikut pada terminal:
+```console
+flutter pub add http
+```
+
+Setelah itu, kita juga perlu menambahkan kode pada file `android/app/src/main/AndroidManifest.xml` untuk mengizinkan aplikasi mengakses internet. Kode program `AndroidManifest.xml` setelah kode ditambahkan adalah sebagai berikut:
+```xml
+<!-- AndroidManifest.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application
+        ...
+    </application>
+</manifest>
+```
+
+Setelah itu, kita akan membuat halaman yang berisi daftar semua item yang terdapat pada *endpoint* `JSON` di Django yang telah kita *deploy*. Karena sebelumnya halaman berisi daftar item sudah dibuat, kita hanya perlu mengubah kode program `item_list.dart` menjadi seperti berikut:
+```dart
+// item_list.dart
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:yugioh_card/widgets/item_card.dart';
+
+class ItemListPage extends StatefulWidget {
+  const ItemListPage({Key? key}) : super(key: key);
+
+  @override
+  _ItemListPageState createState() => _ItemListPageState();
+}
+
+class _ItemListPageState extends State<ItemListPage> {
+  Future<List<Item>> fetchItems() async {
+    var url = Uri.parse('https://pras-yugioh-card.onrender.com/json/');
+    var response = await http.get(url, headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    });
+
+    if (response.statusCode == 200) {
+      List items = json.decode(response.body);
+      return items.map((item) => Item.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load items');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: const LeftDrawer(),
+      appBar: AppBar(
+        title: const Text('Item List'),
+      ),
+      body: FutureBuilder(
+        future: fetchItems(),
+        builder: (BuildContext context, AsyncSnapshot<List<Item>> snapshot) {
+          if (snapshot.hasData) {
+            List<Item>? items = snapshot.data;
+            return GridView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: items!.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemBuilder: (context, index) {
+                return ItemCard(items[index]);
+              },
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+}
+
+```
+
+### Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item
+Karena sebelumnya halaman detail untuk setiap item sudah dibuat, kita hanya perlu mengubah kode program `item_detail.dart` menjadi seperti berikut:
+```dart
+// item_detail.dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
+
+class ItemDetail extends StatelessWidget {
+  final Item item;
+
+  const ItemDetail({Key? key, required this.item}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(item.fields.name),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Align(
+          alignment: Alignment.topCenter,
+          child: Column(
+            children: [
+              Image.network(
+                item.fields.image,
+                width: 300,
+                height: 440,
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+              Container(
+                padding: const EdgeInsets.all(16.0),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00071f),
+                  border: Border.all(color: const Color(0xFF1D3E67)),
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Amount: ${item.fields.amount}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "${item.fields.cardType} | ${item.fields.attribute} | ${item.fields.level}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.fields.effectType,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "[${item.fields.types}]",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.fields.description,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "ATK/ ${item.fields.atk} DEF/ ${item.fields.deff}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      "#${item.fields.passcode}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.fields.cardProperty,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(3)),
+                    Text(
+                      item.fields.rulings,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+Selain itu, kita juga perlu mengubah kode program `item_card.dart` menjadi seperti berikut:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:yugioh_card/screens/item_detail.dart';
+
+class ItemCard extends StatelessWidget {
+  final Item item;
+
+  const ItemCard(this.item, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: InkWell(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => ItemDetail(item: item)));
+        },
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.network(
+                item.fields.image,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              bottom: 5,
+              left: 5,
+              child: CircleAvatar(
+                backgroundColor: Colors.black.withOpacity(0.5),
+                radius: 20,
+                child: Text(
+                  item.fields.amount.toString(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+### Mengubah kode program `menu.dart`, `left_drawer.dart`, dan `add_item.dart` sesuai dengan perubahan model `Item`
+Karena sebelumnya kode program `menu.dart`, `left_drawer.dart`, dan `add_item.dart` telah dibuat, kita hanya perlu mengubah kode program tersebut sesuai dengan perubahan model `Item`. Berikut adalah kode program `menu.dart` setelah diubah:
+```dart
+// menu.dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/widgets/menu_card.dart';
+import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
+
+class Menu extends StatelessWidget {
+  Menu({Key? key}) : super(key: key);
+
+  final List<MenuItem> menuItems = [
+    MenuItem(
+      title: 'Lihat Item',
+      icon: Icons.list_alt_outlined,
+      color: const Color(0xFF0D6EFD),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ItemListPage()),
+        );
+      },
+    ),
+    MenuItem(
+      title: 'Tambah Item',
+      icon: Icons.add_circle_outline,
+      color: const Color(0xFF198754),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ItemFormPage()),
+        );
+      },
+    ),
+    MenuItem(
+      title: 'Logout',
+      icon: Icons.logout,
+      color: const Color(0xFFDC3545),
+      onTap: (BuildContext context) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(const SnackBar(
+            content: Text("Kamu telah menekan tombol Logout!"),
+            duration: Duration(seconds: 2),
+          ));
+      },
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Yu-Gi-Oh! Card Collection',
+        ),
+      ),
+      drawer: const LeftDrawer(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Text(
+                  'Menu',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              GridView.count(
+                primary: true,
+                padding: const EdgeInsets.all(20.0),
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                children: menuItems.map((item) {
+                  return MenuCard(item);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+Berikut adalah kode program `left_drawer.dart` setelah diubah:
+```dart
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: [
+        const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Color(0xFF001427),
+            ),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/logo.png'),
+                  radius: 40,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                // App Name and Version
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Yu-Gi-Oh!',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Card Collection',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            )),
+        Column(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text('Halaman Utama'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => Menu()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_circle_outline),
+              title: const Text('Tambah Item'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ItemFormPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.list_alt_outlined),
+              title: const Text('Lihat Item'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemListPage()),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ));
+  }
+}
+
+```
+Berikut adalah kode program `add_item.dart` setelah diubah:
+```dart
+// add_item.dart
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/models/item.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class ItemFormPage extends StatefulWidget {
+  const ItemFormPage({Key? key}) : super(key: key);
+
+  @override
+  State<ItemFormPage> createState() => _ItemFormPageState();
+}
+
+class _ItemFormPageState extends State<ItemFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  var _name = '';
+  var _amount = '';
+  var _description = '';
+  var _cardType = '';
+  var _passcode = '';
+  var _attribute = '';
+  var _types = '';
+  var _level = '';
+  var _atk = '';
+  var _def = '';
+  var _effectType = '';
+  var _cardProperty = '';
+  var _rulings = '';
+  var _image = '';
+
+  Future<bool> postWithImage(BuildContext context, Fields item) async {
+    var url = 'https://pras-yugioh-card.onrender.com/create-flutter/';
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+
+    final cookieRequest = context.read<CookieRequest>();
+    request.headers.addAll(cookieRequest.headers);
+
+    request.fields['name'] = item.name;
+    request.fields['amount'] = item.amount.toString();
+    request.fields['description'] = item.description;
+    request.fields['card_type'] = item.cardType;
+    request.fields['passcode'] = item.passcode.toString();
+    request.fields['attribute'] = item.attribute;
+    request.fields['types'] = item.types;
+    request.fields['level'] = item.level.toString();
+    request.fields['atk'] = item.atk.toString();
+    request.fields['deff'] = item.deff.toString();
+    request.fields['effect_type'] = item.effectType;
+    request.fields['card_property'] = item.cardProperty;
+    request.fields['rulings'] = item.rulings;
+
+    request.files.add(await http.MultipartFile.fromPath('image', item.image));
+
+    var response = await http.Response.fromStream(await request.send());
+
+    return jsonDecode(response.body)['status'];
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Tambah Item',
+          ),
+        ),
+      ),
+      drawer: const LeftDrawer(),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Card Information',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Blue-Eyes White Dragon',
+                labelText: 'Card Name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _name = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Card Name is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: '3',
+                labelText: 'Amount',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _amount = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Amount is required';
+                }
+                if (int.tryParse(value) == null) {
+                  return 'Amount must be a number';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                hintText:
+                    'This legendary dragon is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature and lived to tell the tale.',
+                labelText: 'Description',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _description = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Description is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                hintText: 'Monster',
+                labelText: 'Card Type',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              value: 'Select Card Type',
+              onChanged: (String? value) {
+                setState(() {
+                  _cardType = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    value == 'Select Card Type') {
+                  return 'Card Type is required';
+                }
+                return null;
+              },
+              items: <String>[
+                'Select Card Type',
+                'Monster',
+                'Spell',
+                'Trap',
+                'Command',
+                'Counter',
+                'Skill',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      )),
+                );
+              }).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: '89631139',
+                labelText: 'Passcode',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _passcode = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Passcode is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                hintText: 'Light',
+                labelText: 'Attribute',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              value: 'Select Attribute',
+              onChanged: (String? value) {
+                setState(() {
+                  _attribute = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    value == 'Select Attribute') {
+                  return 'Attribute is required';
+                }
+                return null;
+              },
+              items: <String>[
+                'Select Attribute',
+                'Dark',
+                'Divine',
+                'Earth',
+                'Fire',
+                'Laugh',
+                'Light',
+                'Water',
+                'Wind',
+                '?',
+                '(No Attribute)',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      )),
+                );
+              }).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Dragon / Normal',
+                labelText: 'Types',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _types = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Types is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: '8',
+                labelText: 'Level',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _level = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Level is required';
+                }
+                if (int.tryParse(value) == null) {
+                  return 'Level must be a number';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: '3000',
+                labelText: 'ATK',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _atk = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'ATK is required';
+                }
+                if (int.tryParse(value) == null) {
+                  return 'ATK must be a number';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: '2500',
+                labelText: 'DEF',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _def = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'DEF is required';
+                }
+                if (int.tryParse(value) == null) {
+                  return 'DEF must be a number';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: 'Normal',
+                labelText: 'Effect Type',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _effectType = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Effect Type is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButtonFormField<String>(
+              decoration: InputDecoration(
+                hintText: 'Normal',
+                labelText: 'Card Property',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              value: 'Select Card Property',
+              onChanged: (String? value) {
+                setState(() {
+                  _cardProperty = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null ||
+                    value.isEmpty ||
+                    value == 'Select Card Property') {
+                  return 'Card Property is required';
+                }
+                return null;
+              },
+              items: <String>[
+                'Select Card Property',
+                'Normal',
+                'Continuous',
+                'Counter',
+                'Equip',
+                'Field',
+                'Quick-Play',
+                'Ritual',
+                '(No Property)',
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                      )),
+                );
+              }).toList(),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              maxLines: 5,
+              keyboardType: TextInputType.multiline,
+              decoration: InputDecoration(
+                hintText: 'None',
+                labelText: 'Rulings',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+              ),
+              onChanged: (String? value) {
+                setState(() {
+                  _rulings = value!;
+                });
+              },
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Rulings is required';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Container(
+                width: 300,
+                height: 440,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 1,
+                  ),
+                ),
+                child: _image == ''
+                    ? const Center(
+                        child: Text('No image selected.'),
+                      )
+                    : Image.file(
+                        File(_image),
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).primaryColor,
+                  ),
+                  foregroundColor: MaterialStateProperty.all<Color>(
+                    Colors.white,
+                  ),
+                ),
+                onPressed: () async {
+                  final ImagePicker picker = ImagePicker();
+                  final XFile? image = await picker.pickImage(
+                    source: ImageSource.gallery,
+                    imageQuality: 50,
+                    maxWidth: 400,
+                  );
+                  setState(() {
+                    _image = image!.path;
+                  });
+                },
+                child: const Text('Select Image'),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              // Add padding to the bottom and top of the button
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: SizedBox(
+                width: 300,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  onPressed: () async {
+                    if (_image.isEmpty) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content: Text("Image is required!"),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                    } else if (_formKey.currentState!.validate() &&
+                        _image.isNotEmpty) {
+                      final item = Fields(
+                        name: _name,
+                        amount: int.parse(_amount),
+                        description: _description,
+                        cardType: _cardType,
+                        passcode: int.parse(_passcode),
+                        attribute: _attribute,
+                        types: _types,
+                        level: int.parse(_level),
+                        atk: int.parse(_atk),
+                        deff: int.parse(_def),
+                        effectType: _effectType,
+                        cardProperty: _cardProperty,
+                        rulings: _rulings,
+                        image: _image,
+                        user: 1,
+                      );
+                      var response = await postWithImage(context, item);
+                      if (response == true) {
+                        showFormData(
+                            context,
+                            Fields(
+                              name: _name,
+                              amount: int.parse(_amount),
+                              description: _description,
+                              cardType: _cardType,
+                              passcode: int.parse(_passcode),
+                              attribute: _attribute,
+                              types: _types,
+                              level: int.parse(_level),
+                              atk: int.parse(_atk),
+                              deff: int.parse(_def),
+                              effectType: _effectType,
+                              cardProperty: _cardProperty,
+                              rulings: _rulings,
+                              image: _image,
+                              user: 1,
+                            ));
+                        _formKey.currentState!.reset();
+                        setState(() {
+                          _image = '';
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            const SnackBar(
+                              content: Text("Card Failed to Save!"),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                      }
+                    }
+                  },
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0, // Increase font size
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          )
+        ])),
+      ),
+    );
+  }
+}
+
+void showFormData(BuildContext context, Fields item) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Card Saved Successfully'),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Card Name: ${item.name}'),
+              Text('Amount: ${item.amount}'),
+              Text('Description: ${item.description}'),
+              Text('Card Type: ${item.cardType}'),
+              Text('Passcode: ${item.passcode}'),
+              Text('Attribute: ${item.attribute}'),
+              Text('Types: ${item.types}'),
+              Text('Level: ${item.level}'),
+              Text('ATK: ${item.atk}'),
+              Text('DEF: ${item.deff}'),
+              Text('Effect Type: ${item.effectType}'),
+              Text('Card Property: ${item.cardProperty}'),
+              Text('Rulings: ${item.rulings}'),
+              Image.file(
+                File(item.image),
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+```
+
+### Membuat *logout* pada aplikasi Flutter
+Karena sebelumnya kode program `menu.dart` telah dibuat, kita hanya perlu mengubah kode program tersebut pada function `logout` menjadi seperti berikut:
+```dart
+// menu.dart
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:yugioh_card/widgets/left_drawer.dart';
+import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/widgets/menu_card.dart';
+import 'package:yugioh_card/screens/add_item.dart';
+import 'package:yugioh_card/screens/item_list.dart';
+import 'package:yugioh_card/screens/login.dart';
+
+class Menu extends StatelessWidget {
+  Menu({Key? key}) : super(key: key);
+
+  final List<MenuItem> menuItems = [
+    MenuItem(
+      title: 'Lihat Item',
+      icon: Icons.list_alt_outlined,
+      color: const Color(0xFF0D6EFD),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ItemListPage()),
+        );
+      },
+    ),
+    MenuItem(
+      title: 'Tambah Item',
+      icon: Icons.add_circle_outline,
+      color: const Color(0xFF198754),
+      onTap: (BuildContext context) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const ItemFormPage()),
+        );
+      },
+    ),
+    MenuItem(
+      title: 'Logout',
+      icon: Icons.logout,
+      color: const Color(0xFFDC3545),
+      onTap: (BuildContext context) async {
+        final request = Provider.of<CookieRequest>(context, listen: false);
+        final response = await request
+            .logout("https://pras-yugioh-card.onrender.com/auth/logout");
+        if (response['status']) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(response['message']),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text("Logout Failed"),
+              content: Text(response["message"]),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            ),
+          );
+        }
+      },
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Yu-Gi-Oh! Card Collection',
+        ),
+      ),
+      drawer: const LeftDrawer(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: Text(
+                  'Menu',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              GridView.count(
+                primary: true,
+                padding: const EdgeInsets.all(20.0),
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                crossAxisCount: 3,
+                shrinkWrap: true,
+                children: menuItems.map((item) {
+                  return MenuCard(item);
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+### Membuat *register* pada aplikasi Flutter
+Selanjutnya, kita akan membuat *register* pada aplikasi Flutter dengan membuat *file* baru bernama `register.dart` pada folder `lib/screens`. Kode program `register.dart` adalah sebagai berikut:
+```dart
+// register.dart
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:yugioh_card/screens/login.dart';
+
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _password2Controller = TextEditingController();
+  bool _obscureText = true;
+  bool _obscureText2 = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final request = Provider.of<CookieRequest>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Register'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+            const CircleAvatar(
+              backgroundImage: AssetImage('assets/images/logo.png'),
+              radius: 40,
+            ),
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Yu-Gi-Oh!',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Card Collection',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 100),
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+              ),
+            ),
+            TextField(
+              controller: _password2Controller,
+              obscureText: _obscureText2,
+              decoration: InputDecoration(
+                labelText: 'Verify Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText2 ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText2 = !_obscureText2;
+                    });
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+              child: const Text(
+                'Have an account? Login',
+                style: TextStyle(
+                  color: Color(0xFF6EA8FE),
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+              onPressed: () async {
+                final response = await request.post(
+                    "https://pras-yugioh-card.onrender.com/auth/register", {
+                  "username": _usernameController.text,
+                  "password": _passwordController.text,
+                  "password2": _password2Controller.text,
+                });
+                if (response['status']) {
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text(response['message']),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("Register Failed"),
+                      content: Text(response["message"]),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: const Text(
+                'Register',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+Selanjutnya, kita akan mengubah kode program `login.dart` menjadi seperti berikut:
+```dart
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:flutter/material.dart';
+import 'package:yugioh_card/screens/menu.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:yugioh_card/screens/register.dart';
+
+void main() {
+  runApp(const LoginApp());
+}
+
+class LoginApp extends StatelessWidget {
+  const LoginApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Login',
+        theme: ThemeData(
+          brightness: Brightness.dark,
+          primaryColor: const Color(0xFF0D6EFD),
+          scaffoldBackgroundColor: const Color(0xFF001B35),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF001427),
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xFF001B35),
+          ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: Color(0xFF031633),
+            contentTextStyle: TextStyle(color: Color(0xFF6EA8FE)),
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          useMaterial3: true,
+        ),
+        home: const LoginPage());
+  }
+}
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    final request = Provider.of<CookieRequest>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+            const CircleAvatar(
+              backgroundImage: AssetImage('assets/images/logo.png'),
+              radius: 40,
+            ),
+            const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Yu-Gi-Oh!',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  'Card Collection',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 100),
+            TextField(
+              controller: _usernameController,
+              decoration: const InputDecoration(
+                labelText: 'Username',
+              ),
+            ),
+            TextField(
+              controller: _passwordController,
+              obscureText: _obscureText,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText;
+                    });
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const RegisterScreen()),
+                );
+              },
+              child: const Text(
+                'Don\'t have an account? Register here!',
+                style: TextStyle(
+                  color: Color(0xFF6EA8FE),
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).primaryColor,
+                ),
+              ),
+              onPressed: () async {
+                String username = _usernameController.text;
+                String password = _passwordController.text;
+
+                final response = await request
+                    .login("https://pras-yugioh-card.onrender.com/auth/login", {
+                  "username": username,
+                  "password": password,
+                });
+
+                if (request.loggedIn) {
+                  String message = response["message"];
+                  String uname = response["username"];
+                  Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => Menu()));
+                  ScaffoldMessenger.of(context)
+                    ..hideCurrentSnackBar()
+                    ..showSnackBar(
+                      SnackBar(
+                        content: Text("$message! Welcome $uname!"),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("Login Failed"),
+                      content: Text(response["message"]),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: const Text(
+                'Login',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+### Melakukan *filter* untuk daftar item
+Karena pada Django REST Framework telah dibuat *filter* untuk daftar item, maka tidak perlu melakukan perubahan pada kode program Flutter.
+
+### Menjawab pertanyaan-pertanyaan tugas 9
+#### Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+Ya, bisa. Kita bisa melakukan pengambilan data JSON tanpa membuat model terlebih dahulu, salah satunya dengan menggunakan `jsonDecode` pada `dart:convert`.
+
+Namun, hal tersebut tidak lebih baik maupun lebih buruk daripada membuat model terlebih dahulu. Karena, jika kita membuat model terlebih dahulu, maka kita bisa melakukan *type checking* pada data yang kita ambil dan ketika data JSON yang diambil memiliki struktur yang kompleks, maka kita bisa mengambil data tersebut dengan lebih mudah.
+
+Pengambilan data JSON tanpa membuat model terlebih dahulu hanya akan memudahkan kita ketika data JSON yang diambil memiliki struktur yang sederhana.
+
+#### Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+CookieRequest adalah class yang digunakan untuk melakukan *request* ke server dengan menggunakan *cookie* yang telah disimpan pada *shared preferences*. Instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter agar kita dapat mengelola *cookie* secara konsisten ketika pengguna melakukan *login* dan melakukan *request* ke server.
+
+#### Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+Pertama, kita melakukan *request* ke server dengan menggunakan `get` pada `CookieRequest`. Kemudian, kita melakukan *decode* pada data JSON yang diterima dari server dengan menggunakan `jsonDecode` pada `dart:convert`. Setelah itu, kita melakukan *mapping* data JSON yang telah di-*decode* ke dalam model yang telah kita buat sebelumnya atau memasukkan data JSON tersebut ke dalam `List` atau `Map` sesuai dengan kebutuhan kita. Terakhir, kita menampilkan data tersebut pada aplikasi Flutter.
+
+#### Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+Pertama, kita mengambil data username dan password yang diinputkan oleh pengguna. Kemudian, kita melakukan *request* ke server dengan menggunakan `login` pada `CookieRequest`. Ketika *request* berhasil, maka kita akan mendapatkan *response* dari server berupa data JSON yang berisi pesan dan username pengguna dan *cookie* akan disimpan pada *shared preferences*. Setelah itu, kita akan menampilkan pesan yang diterima dari server dan menu pada aplikasi Flutter.
+
+#### Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+| Widget | Fungsi |
+| ------ | ------ |
+| `ItemCard` | Menampilkan data item dalam bentuk card. |
+| `MenuCard` | Menampilkan menu dalam bentuk card. |
+| `LeftDrawer` | Menampilkan drawer berisi menu. |
+
+Dengan demikian, proyek aplikasi flutter telah selesai dibuat.

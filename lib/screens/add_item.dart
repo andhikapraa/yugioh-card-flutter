@@ -1,8 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:yugioh_card/widgets/left_drawer.dart';
 import 'package:yugioh_card/models/item.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ItemFormPage extends StatefulWidget {
   const ItemFormPage({Key? key}) : super(key: key);
@@ -13,22 +19,48 @@ class ItemFormPage extends StatefulWidget {
 
 class _ItemFormPageState extends State<ItemFormPage> {
   final _formKey = GlobalKey<FormState>();
-  var item = Item(
-    name: '',
-    amount: 0,
-    description: '',
-    cardType: '',
-    passcode: 0,
-    attribute: '',
-    types: '',
-    level: 0,
-    atk: 0,
-    def: 0,
-    effectType: '',
-    cardProperty: '',
-    rulings: '',
-    imagePath: '',
-  );
+  var _name = '';
+  var _amount = '';
+  var _description = '';
+  var _cardType = '';
+  var _passcode = '';
+  var _attribute = '';
+  var _types = '';
+  var _level = '';
+  var _atk = '';
+  var _def = '';
+  var _effectType = '';
+  var _cardProperty = '';
+  var _rulings = '';
+  var _image = '';
+
+  Future<bool> postWithImage(BuildContext context, Fields item) async {
+    var url = 'https://pras-yugioh-card.onrender.com/create-flutter/';
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+
+    final cookieRequest = context.read<CookieRequest>();
+    request.headers.addAll(cookieRequest.headers);
+
+    request.fields['name'] = item.name;
+    request.fields['amount'] = item.amount.toString();
+    request.fields['description'] = item.description;
+    request.fields['card_type'] = item.cardType;
+    request.fields['passcode'] = item.passcode.toString();
+    request.fields['attribute'] = item.attribute;
+    request.fields['types'] = item.types;
+    request.fields['level'] = item.level.toString();
+    request.fields['atk'] = item.atk.toString();
+    request.fields['deff'] = item.deff.toString();
+    request.fields['effect_type'] = item.effectType;
+    request.fields['card_property'] = item.cardProperty;
+    request.fields['rulings'] = item.rulings;
+
+    request.files.add(await http.MultipartFile.fromPath('image', item.image));
+
+    var response = await http.Response.fromStream(await request.send());
+
+    return jsonDecode(response.body)['status'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +100,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.name = value!;
+                  _name = value!;
                 });
               },
               validator: (String? value) {
@@ -92,7 +124,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.amount = int.parse(value!);
+                  _amount = value!;
                 });
               },
               validator: (String? value) {
@@ -121,7 +153,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.description = value!;
+                  _description = value!;
                 });
               },
               validator: (String? value) {
@@ -145,7 +177,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               value: 'Select Card Type',
               onChanged: (String? value) {
                 setState(() {
-                  item.cardType = value!;
+                  _cardType = value!;
                 });
               },
               validator: (String? value) {
@@ -188,7 +220,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.passcode = int.parse(value!);
+                  _passcode = value!;
                 });
               },
               validator: (String? value) {
@@ -212,7 +244,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               value: 'Select Attribute',
               onChanged: (String? value) {
                 setState(() {
-                  item.attribute = value!;
+                  _attribute = value!;
                 });
               },
               validator: (String? value) {
@@ -258,7 +290,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.types = value!;
+                  _types = value!;
                 });
               },
               validator: (String? value) {
@@ -282,7 +314,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.level = int.parse(value!);
+                  _level = value!;
                 });
               },
               validator: (String? value) {
@@ -309,7 +341,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.atk = int.parse(value!);
+                  _atk = value!;
                 });
               },
               validator: (String? value) {
@@ -336,7 +368,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.def = int.parse(value!);
+                  _def = value!;
                 });
               },
               validator: (String? value) {
@@ -362,7 +394,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.effectType = value!;
+                  _effectType = value!;
                 });
               },
               validator: (String? value) {
@@ -386,7 +418,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               value: 'Select Card Property',
               onChanged: (String? value) {
                 setState(() {
-                  item.cardProperty = value!;
+                  _cardProperty = value!;
                 });
               },
               validator: (String? value) {
@@ -432,7 +464,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
               ),
               onChanged: (String? value) {
                 setState(() {
-                  item.rulings = value!;
+                  _rulings = value!;
                 });
               },
               validator: (String? value) {
@@ -455,12 +487,12 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     width: 1,
                   ),
                 ),
-                child: item.imagePath == ''
+                child: _image == ''
                     ? const Center(
                         child: Text('No image selected.'),
                       )
                     : Image.file(
-                        File(item.imagePath),
+                        File(_image),
                         fit: BoxFit.cover,
                       ),
               ),
@@ -487,7 +519,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
                     maxWidth: 400,
                   );
                   setState(() {
-                    item.imagePath = image!.path;
+                    _image = image!.path;
                   });
                 },
                 child: const Text('Select Image'),
@@ -507,15 +539,70 @@ class _ItemFormPageState extends State<ItemFormPage> {
                       Theme.of(context).primaryColor,
                     ),
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate() &&
-                        item.imagePath != '') {
-                      showFormData(context, item);
-                      items.add(item);
-                      _formKey.currentState!.reset();
-                      setState(() {
-                        item.imagePath = '';
-                      });
+                  onPressed: () async {
+                    if (_image.isEmpty) {
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          const SnackBar(
+                            content: Text("Image is required!"),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                    } else if (_formKey.currentState!.validate() &&
+                        _image.isNotEmpty) {
+                      final item = Fields(
+                        name: _name,
+                        amount: int.parse(_amount),
+                        description: _description,
+                        cardType: _cardType,
+                        passcode: int.parse(_passcode),
+                        attribute: _attribute,
+                        types: _types,
+                        level: int.parse(_level),
+                        atk: int.parse(_atk),
+                        deff: int.parse(_def),
+                        effectType: _effectType,
+                        cardProperty: _cardProperty,
+                        rulings: _rulings,
+                        image: _image,
+                        user: 1,
+                      );
+                      var response = await postWithImage(context, item);
+                      if (response == true) {
+                        showFormData(
+                            context,
+                            Fields(
+                              name: _name,
+                              amount: int.parse(_amount),
+                              description: _description,
+                              cardType: _cardType,
+                              passcode: int.parse(_passcode),
+                              attribute: _attribute,
+                              types: _types,
+                              level: int.parse(_level),
+                              atk: int.parse(_atk),
+                              deff: int.parse(_def),
+                              effectType: _effectType,
+                              cardProperty: _cardProperty,
+                              rulings: _rulings,
+                              image: _image,
+                              user: 1,
+                            ));
+                        _formKey.currentState!.reset();
+                        setState(() {
+                          _image = '';
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context)
+                          ..hideCurrentSnackBar()
+                          ..showSnackBar(
+                            const SnackBar(
+                              content: Text("Card Failed to Save!"),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
+                      }
                     }
                   },
                   child: const Text(
@@ -535,7 +622,7 @@ class _ItemFormPageState extends State<ItemFormPage> {
   }
 }
 
-void showFormData(BuildContext context, Item item) {
+void showFormData(BuildContext context, Fields item) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -554,19 +641,14 @@ void showFormData(BuildContext context, Item item) {
               Text('Types: ${item.types}'),
               Text('Level: ${item.level}'),
               Text('ATK: ${item.atk}'),
-              Text('DEF: ${item.def}'),
+              Text('DEF: ${item.deff}'),
               Text('Effect Type: ${item.effectType}'),
               Text('Card Property: ${item.cardProperty}'),
               Text('Rulings: ${item.rulings}'),
-              // Show the image
-              item.imagePath == ''
-                  ? const Center(
-                      child: Text('No image selected.'),
-                    )
-                  : Image.file(
-                      File(item.imagePath),
-                      fit: BoxFit.cover,
-                    ),
+              Image.file(
+                File(item.image),
+                fit: BoxFit.cover,
+              ),
             ],
           ),
         ),

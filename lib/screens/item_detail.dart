@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:yugioh_card/models/item.dart';
 
@@ -11,7 +10,7 @@ class ItemDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(item.name),
+        title: Text(item.fields.name),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -19,18 +18,11 @@ class ItemDetail extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Column(
             children: [
-              if (item.imagePath.startsWith('assets'))
-                Image.asset(
-                  item.imagePath,
-                  width: 300,
-                  height: 440,
-                )
-              else
-                Image.file(
-                  File(item.imagePath),
-                  width: 300,
-                  height: 440,
-                ),
+              Image.network(
+                "https://pras-yugioh-card.onrender.com/media/${item.fields.image}",
+                width: 300,
+                height: 440,
+              ),
               const Padding(padding: EdgeInsets.all(8)),
               Container(
                 padding: const EdgeInsets.all(16.0),
@@ -44,7 +36,7 @@ class ItemDetail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Amount: ${item.amount}",
+                      "Amount: ${item.fields.amount}",
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -52,7 +44,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      "${item.cardType} | ${item.attribute} | ${item.level}",
+                      "${item.fields.cardType} | ${item.fields.attribute} | ${item.fields.level}",
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -60,7 +52,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      item.effectType,
+                      item.fields.effectType,
                       style: const TextStyle(
                         fontSize: 16,
                         fontStyle: FontStyle.italic,
@@ -69,7 +61,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      "[${item.types}]",
+                      "[${item.fields.types}]",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -78,7 +70,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      item.description,
+                      item.fields.description,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.white,
@@ -86,7 +78,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      "ATK/ ${item.atk} DEF/ ${item.def}",
+                      "ATK/ ${item.fields.atk} DEF/ ${item.fields.deff}",
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -94,7 +86,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      "#${item.passcode}",
+                      "#${item.fields.passcode}",
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -102,7 +94,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      item.cardProperty,
+                      item.fields.cardProperty,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Colors.white,
@@ -110,7 +102,7 @@ class ItemDetail extends StatelessWidget {
                     ),
                     const Padding(padding: EdgeInsets.all(3)),
                     Text(
-                      item.rulings,
+                      item.fields.rulings,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.yellow,

@@ -1,10 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:yugioh_card/models/item.dart';
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:yugioh_card/widgets/left_drawer.dart';
-import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/models/menu_item.dart';
 import 'package:yugioh_card/widgets/menu_card.dart';
 import 'package:yugioh_card/screens/add_item.dart';
 import 'package:yugioh_card/screens/item_list.dart';
+import 'package:yugioh_card/screens/login.dart';
 
 class Menu extends StatelessWidget {
   Menu({Key? key}) : super(key: key);
@@ -17,7 +21,7 @@ class Menu extends StatelessWidget {
       onTap: (BuildContext context) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ItemListPage(items: items)),
+          MaterialPageRoute(builder: (context) => const ItemListPage()),
         );
       },
     ),
@@ -36,13 +40,40 @@ class Menu extends StatelessWidget {
       title: 'Logout',
       icon: Icons.logout,
       color: const Color(0xFFDC3545),
-      onTap: (BuildContext context) {
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(const SnackBar(
-            content: Text("Kamu telah menekan tombol Logout!"),
-            duration: Duration(seconds: 2),
-          ));
+      onTap: (BuildContext context) async {
+        final request = Provider.of<CookieRequest>(context, listen: false);
+        final response = await request
+            .logout("https://pras-yugioh-card.onrender.com/auth/logout");
+        if (response['status']) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(response['message']),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+          );
+        } else {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text("Logout Failed"),
+              content: Text(response["message"]),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("OK"),
+                ),
+              ],
+            ),
+          );
+        }
       },
     ),
   ];

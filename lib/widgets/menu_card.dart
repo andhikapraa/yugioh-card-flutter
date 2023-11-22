@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yugioh_card/widgets/menu_item.dart';
+import 'package:yugioh_card/models/menu_item.dart';
 
 class MenuCard extends StatelessWidget {
   final MenuItem item;
