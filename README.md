@@ -1735,11 +1735,11 @@ Setelah itu, kita akan membuat halaman yang berisi daftar semua item yang terdap
 ```dart
 // item_list.dart
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:provider/provider.dart';
 import 'package:yugioh_card/widgets/left_drawer.dart';
 import 'package:yugioh_card/models/item.dart';
 import 'package:yugioh_card/widgets/item_card.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 class ItemListPage extends StatefulWidget {
   const ItemListPage({Key? key}) : super(key: key);
@@ -1749,19 +1749,19 @@ class ItemListPage extends StatefulWidget {
 }
 
 class _ItemListPageState extends State<ItemListPage> {
-  Future<List<Item>> fetchItems() async {
-    var url = Uri.parse('https://pras-yugioh-card.onrender.com/json/');
-    var response = await http.get(url, headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    });
+  Future<List<Item>> fetchItems(BuildContext context) async {
+    final request = context.watch<CookieRequest>();
+    var url = 'https://pras-yugioh-card.onrender.com/json';
+    var response = await request.get(url);
 
-    if (response.statusCode == 200) {
-      List items = json.decode(response.body);
-      return items.map((item) => Item.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load items');
+    List<Item> items = [];
+    for (var i in response) {
+      if (i != null) {
+        Item item = Item.fromJson(i);
+        items.add(item);
+      }
     }
+    return items;
   }
 
   @override
@@ -1772,9 +1772,23 @@ class _ItemListPageState extends State<ItemListPage> {
         title: const Text('Item List'),
       ),
       body: FutureBuilder(
-        future: fetchItems(),
+        future: fetchItems(context),
         builder: (BuildContext context, AsyncSnapshot<List<Item>> snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data!.isEmpty) {
+            return const Center(
+              child: Text(
+                'You have no cards',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          } else if (snapshot.data == null) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
             List<Item>? items = snapshot.data;
             return GridView.builder(
               padding: const EdgeInsets.all(8),
@@ -1788,10 +1802,6 @@ class _ItemListPageState extends State<ItemListPage> {
               itemBuilder: (context, index) {
                 return ItemCard(items[index]);
               },
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
             );
           }
         },
@@ -1827,7 +1837,7 @@ class ItemDetail extends StatelessWidget {
           child: Column(
             children: [
               Image.network(
-                item.fields.image,
+                "https://pras-yugioh-card.onrender.com/media/${item.fields.image}",
                 width: 300,
                 height: 440,
               ),
@@ -1951,7 +1961,7 @@ class ItemCard extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Image.network(
-                item.fields.image,
+                "https://pras-yugioh-card.onrender.com/media/${item.fields.image}",
                 fit: BoxFit.cover,
               ),
             ),
